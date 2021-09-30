@@ -54,9 +54,9 @@ This phase is called understanding because its purpose is to get used to the way
 
 1. _Definition of a trip and collection time window:_ It is really important to know whether there is any restriction considered in the definition of a trip. Sometimes, distance or duration restrictions are used to get comparable results to previous surveys. To give an example, the travel survey of 2019 conducted in Bogotá collected all trips with a duration of 3 minutes or more. However, when they were analyzing the results, they considered another restriction that consisted in leaving out all walking trips shorter than 15 minutes because it allowed them to compare these results to the previous survey made in 2015.
 
-If the analysis consists in estimating the health impacts in different scenarios in the same city, then these restrictions should be considered in the analysis process, otherwise the local authorities would not know what to do with the results.
+    If the analysis consists in estimating the health impacts in different scenarios in the same city, then these restrictions should be considered in the analysis process, otherwise the local authorities would not know what to do with the results.
 
-Something similar happens to the time window asked in the survey. In the majority of cases, people are asked about the trip made the day before the survey was taking place (usually between 4 am of the day before the survey and 4 am of the day of the survey). However, there are some cases where people are asked about specific days of the week or to make a distinction between trips made during the week and on weekends. Making sure which case it is, facilitates the preprocessing procedure in following phases.
+    Something similar happens to the time window asked in the survey. In the majority of cases, people are asked about the trip made the day before the survey was taking place (usually between 4 am of the day before the survey and 4 am of the day of the survey). However, there are some cases where people are asked about specific days of the week or to make a distinction between trips made during the week and on weekends. Making sure which case it is, facilitates the preprocessing procedure in following phases.
 
 1. _Replicate main results from raw datasets:_ The purpose of replicating the main results is that one can be sure that the datasets are being used correctly. Here it is of special interest the way the sampling weights are handled because most of the results are published using them. When talking about main results, it could be as simple as calculating the total number of households, number of people, people per household, and mode share, although it could be more than that.
 
@@ -66,14 +66,17 @@ Since doing this part involves having a look at the data for the first time, it 
 
 This phase is called preprocessing because its purpose is to filter rows, create variables and get the structure of the dataset right. It consists in the following steps:
 
-1. _Geographical coverage:_ Most of the surveys cover the main cities but also the municipalities around them. In this step, the decision about including more municipalities in the analysis needs to be done. This decision goes in hand with the injury&#39;s dataset. If there is information about injuries in the municipalities around, then they should be also included in the trips&#39; dataset. If not, it is better to filter them out and leave only the information at city level.
+4. _Geographical coverage:_ Most of the surveys cover the main cities but also the municipalities around them. In this step, the decision about including more municipalities in the analysis needs to be done. This decision goes in hand with the injury&#39;s dataset. If there is information about injuries in the municipalities around, then they should be also included in the trips&#39; dataset. If not, it is better to filter them out and leave only the information at city level.
 
-Note that expanding the coverage of the information to more municipalities, implies that the population dataset also needs to include them. Furthermore, ignoring the geographical coverage in all datasets included in the model, will impact the results significantly because the regular pattern of the city will be distorted by these differences.
+    Note that expanding the coverage of the information to more municipalities, implies that the population dataset also needs to include them. Furthermore, ignoring the geographical coverage in all datasets included in the model, will impact the results significantly because the regular pattern of the city will be distorted by these differences.
 
-To illustrate this, let&#39;s say that a travel survey includes information about a city and 5 municipalities around it, and the injuries dataset only includes information about the city. The model is then estimating the distance travelled per mode of transport and using it to estimate the number of fatalities in traffic and the risk per billion kilometers. Since the data of the travel survey have information about more places, then the distance travelled will increase and the probability of having a traffic injury will decrease. As a consequence, the number of injuries will be underestimated.
+    To illustrate this, let&#39;s say that a travel survey includes information about a city and 5 municipalities around it, and the injuries dataset only includes information about the city. The model is then estimating the distance travelled per mode of transport and using it to estimate the number of fatalities in traffic and the risk per billion kilometers. Since the data of the travel survey have information about more places, then the distance travelled will increase and the probability of having a traffic injury will decrease. As a consequence, the number of injuries will be underestimated.
 
 1. _Classification and translation of modes of transport:_ Usually the detail asked in travel surveys about modes of transport is larger than what is needed in the model. People are asked about whether they took a Bus or a BRT, or whether they used a bicycle or an assisted bicycle. In any case, it is important to make a reclassification of these modes, and depending on the language used the survey, a translation may be needed. To ease the process of doing this reclassification, Table 2 shows the reclassification done in the cities analyzed. Take a look at informal modes of transport, they need to be classified regardless its condition: an informal bus is a bus anyway, an informal taxi is a taxi. If there is a mode in a survey that does not appear in this table, then it can be classified as the mode that is closest to it.
 
+    Note that the last column of Table 2 says hierarchy. This hierarchy is important to decide the main mode of transport of a trip, based on stage modes. Public transport has the highest priority, organized by size, and private modes are then organized by their size. This is why in the example mentioned in Table 1, the trip mode is metro and not bus, because of its hierarchy.
+
+    Finally, it is important to mention that this kind of hierarchy was also used in some surveys to decide the main mode, and getting it right impacts directly the share mode. In those cases where there is already a hierarchy defined, it is recommended to use it to get the same results presented in the final report.
 _Table 2. Classification of modes of transport_
 
 | **Modes** | **Reclassification** | **Hierarchy** |
@@ -89,17 +92,18 @@ _Table 2. Classification of modes of transport_
 | Truck, heavy truck | Truck | 9 |
 | Cable and any other mode of transport | Other | 10 |
 
-Note that the last column of Table 2 says hierarchy. This hierarchy is important to decide the main mode of transport of a trip, based on stage modes. Public transport has the highest priority, organized by size, and private modes are then organized by their size. This is why in the example mentioned in Table 1, the trip mode is metro and not bus, because of its hierarchy.
+    
+6. _Stage level information:_ this is perhaps one of the most important steps in the preprocessing phase. It consists in judging whether there is enough information at stage level or not. To decide if the information is enough, let me go back to the enumeration of variables mentioned in the beginning of the document. There should be a stage ID to identify the stage, a stage mode, and a stage duration or stage distance.
 
-Finally, it is important to mention that this kind of hierarchy was also used in some surveys to decide the main mode, and getting it right impacts directly the share mode. In those cases where there is already a hierarchy defined, it is recommended to use it to get the same results presented in the final report.
+    In the surveys analyzed so far, there is usually information about the stage ID and stage mode, but not about duration or distance. In these cases, there are different options to deal with this:
 
-1. _Stage level information:_ this is perhaps one of the most important steps in the preprocessing phase. It consists in judging whether there is enough information at stage level or not. To decide if the information is enough, let me go back to the enumeration of variables mentioned in the beginning of the document. There should be a stage ID to identify the stage, a stage mode, and a stage duration or stage distance.
+    a. _Ignore stage level information:_ even though there is information at stage level, not having the duration or the distance makes it useless. As a consequence, this information can be ignored and use the dataset at trip level.
 
-In the surveys analyzed so far, there is usually information about the stage ID and stage mode, but not about duration or distance. In these cases, there are different options to deal with this:
+    b. _Estimate stage duration based on trip duration:_ As I mentioned before, most of the travel surveys ask about the start and end hour of the trip; with this information the trip duration can be calculated (if it is not in the dataset already). The next step consists in estimate the stage duration based on the trip duration and the number of stages. This can be done following these considerations:
 
-  1. _Ignore stage level information:_ even though there is information at stage level, not having the duration or the distance makes it useless. As a consequence, this information can be ignored and use the dataset at trip level.
-  2. _Estimate stage duration based on trip duration:_ As I mentioned before, most of the travel surveys ask about the start and end hour of the trip; with this information the trip duration can be calculated (if it is not in the dataset already). The next step consists in estimate the stage duration based on the trip duration and the number of stages. This can be done following these considerations:
-    1. _Split trip duration equally across stages:_ before doing this, investigate if there is information about the walking stages. Usually, the walking stages that correspond to the beginning and end of a trip are recorded. If this information is available, then subtract these minutes from the overall duration, and the result can be divided equally between the remaining stages. If it is not the case, then divide the overall duration equally for every stage (including walking stages). To illustrate this process, let&#39;s use the example mentioned above about Paul. In Table 3 it is assumed that there is information about the walking stages, whereas in Table 4 this information is not available.
+      b.1. _Split trip duration equally across stages:_ before doing this, investigate if there is information about the walking stages. Usually, the walking stages that correspond to the beginning and end of a trip are recorded. If this information is available, then subtract these minutes from the overall duration, and the result can be divided equally between the remaining stages. If it is not the case, then divide the overall duration equally for every stage (including walking stages). To illustrate this process, let&#39;s use the example mentioned above about Paul. In Table 3 it is assumed that there is information about the walking stages, whereas in Table 4 this information is not available.
+
+      Note the difference between both approaches, the first scenario looks more realistic than the second one, because it is very unlikely that a person, Paul in this case, would spend the same number of minutes in each stage. Also note that in the second approach the duration in walking stages is almost twice than in the original, implying that he is doing more physical activity.
 
 _Table 3. Estimation of stage duration dividing equally and with walking stages_
 
@@ -109,8 +113,6 @@ _Table 3. Estimation of stage duration dividing equally and with walking stages_
 | 1-1-2 | Bus | 17.5 | 1-1 | Metro | 47 | 1 | male | 35 |
 | 1-1-3 | Metro | 17.5 | 1-1 | Metro | 47 | 1 | male | 35 |
 | 1-1-4 | Walk | 7 | 1-1 | metro | 47 | 1 | male | 35 |
-
-Note the difference between both approaches, the first scenario looks more realistic than the second one, because it is very unlikely that a person, Paul in this case, would spend the same number of minutes in each stage. Also note that in the second approach the duration in walking stages is almost twice than in the original, implying that he is doing more physical activity.
 
 _Table 4. Estimation of stage duration dividing equally and without walking stages_
 
@@ -123,13 +125,13 @@ _Table 4. Estimation of stage duration dividing equally and without walking stag
 
 We started using this approach in all cities that recorded walking stages. When we don&#39;t have it, then we are working at trip level.
 
-    1. _Split trip duration using mode hierarchy:_ this approach is similar to the previous one with the difference that instead of equally splitting trip duration, this time a hierarchy is considered. So, stages made in metro are more likely to last longer than by bus, and as a consequence the duration should be split accordingly.
+b.2. _Split trip duration using mode hierarchy:_ this approach is similar to the previous one with the difference that instead of equally splitting trip duration, this time a hierarchy is considered. So, stages made in metro are more likely to last longer than by bus, and as a consequence the duration should be split accordingly.
 
 Even though this approach looks closer to reality, the problem with it is that is city specific and there is not way to know the hierarchy (at least that I know of).
 
 This can be solved by looking at the distribution of trip durations by mode in only those trips that consist of only one main stage (which usually are the majority of trips). And then try to come up with a rule of thumb.
 
-1. _A row for each trip/stage:_ Once the previous step is done, then it is easy to organize and structure the information in a way that every trip/stage is in a single row. At this point, trip variables (trip\_id, trip\_mode, trip\_duration, trip\_distance) and, if applicable, stage variables should be ready to analyze by the package.
+7. _A row for each trip/stage:_ Once the previous step is done, then it is easy to organize and structure the information in a way that every trip/stage is in a single row. At this point, trip variables (trip\_id, trip\_mode, trip\_duration, trip\_distance) and, if applicable, stage variables should be ready to analyze by the package.
 
 ## Harmonizing
 
