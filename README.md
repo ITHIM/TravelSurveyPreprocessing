@@ -2,7 +2,7 @@
 
 This repo is to centralize all efforts made to preprocess travel surveys from different cities around the world. Although the main use of the processed datasets is the ITHIM-R package, they can be used for other purposes.
 
-The protocol is located [here](Protocol/protocol.md)
+The protocol is located [here](https://github.com/ITHIM/TravelSurveyPreprocessing/blob/main/Protocol/Protocol.md)
 
 Ideally raw datasets should be saved in the V-drive in the path `/CEDAR/Studies/MOVED/HealthImpact/Data/Country/` and processed datasets should be saved here.
 
