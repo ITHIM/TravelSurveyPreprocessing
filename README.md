@@ -15,4 +15,18 @@ path <- "C:/Users/admin/downloads/trips_2019/"
 people <- read_excel(paste0(path, "PersonasEODH2019.xlsx"))
 ```
 
-In this way, anyone that has access to the V-drive can run the scrip buy uncommenting the first line and uncommenting the second one.
+In this way, anyone that has access to the V-drive can run the script by uncommenting the first line and commenting the second one.
+
+Note: All scripts should have a corresponding `HTML` file so everyone can easily see what has been done without running it. This is done by adding the following piece of code in the beggining of each script:
+
+```
+#' ---
+#' title: "Preprocessing of [CITY]'s travel dataset. 
+#' author: "[AUTHOR]"
+#' output:
+#'   html_document:
+#'     toc: true
+#'     toc_float: true
+#' ---
+```
+
