@@ -1,0 +1,47 @@
+﻿City,VariableName,Code,RawMode,ITHIM,Hierarchy
+Santiago,ModoAgregado,16,Tren,train,1
+Santiago,ModoAgregado,4,Metro,metro,2
+Santiago,ModoAgregado,3,Bus troncal,bus,3
+Santiago,ModoAgregado,2,Bus alimentador,bus,4
+Santiago,ModoAgregado,11,Bus institucional,bus,5
+Santiago,ModoAgregado,12,Bus interurbano o rural,bus,6
+Santiago,ModoAgregado,14,Bus urbano con pago al conductor (Metrobus y otros),bus,7
+Santiago,ModoAgregado,7,Taxi o radiotaxi,taxi,8
+Santiago,ModoAgregado,5,Taxi colectivo,taxi,9
+Santiago,ModoAgregado,1,Auto Chofer,car,10
+Santiago,ModoAgregado,17,Auto Acompañante,car,11
+Santiago,ModoAgregado,13,"Furgón escolar, como chofer o acompañante",van,12
+Santiago,ModoAgregado,6,"Furgón escolar, como pasajero",van,13
+Santiago,ModoAgregado,10,Motocicleta,motorcycle,14
+Santiago,ModoAgregado,18,Motocicleta Acompañante,motorcycle,15
+Santiago,ModoAgregado,9,Bicicleta,bicycle,16
+Santiago,ModoAgregado,8,Enteramente a pie,walk,17
+Santiago,ModoAgregado,15,Servicio Informal,other,18
+Valparaiso,ModoAgregado,4,Metro Valparaíso ,metro,1
+Valparaiso,ModoAgregado,3,Bus urbano ,bus,2
+Valparaiso,ModoAgregado,13,Bus institucional o particular ,bus,3
+Valparaiso,ModoAgregado,14,Bus interurbano o rural ,bus,4
+Valparaiso,ModoAgregado,17,Trolebús ,bus,5
+Valparaiso,ModoAgregado,5,Taxi Colectivo ,taxi,6
+Valparaiso,ModoAgregado,8,Taxi o radiotaxi ,taxi,7
+Valparaiso,ModoAgregado,1,Auto acompañante,car,8
+Valparaiso,ModoAgregado,2,Auto chofer,car,9
+Valparaiso,ModoAgregado,6,Furgón escolar pasajero,van,10
+Valparaiso,ModoAgregado,7,Furgón escolar chofer,van,11
+Valparaiso,ModoAgregado,11,Motocicleta chofer,motorcycle,12
+Valparaiso,ModoAgregado,12,Motocicleta acompañante,motorcycle,13
+Valparaiso,ModoAgregado,10,Bicicleta ,bicycle,14
+Valparaiso,ModoAgregado,9,Caminata,walk,15
+Valparaiso,ModoAgregado,15,Servicio informal ,other,16
+Valparaiso,ModoAgregado,16,Ascensor ,other,17
+Antofagasta,ModoAgregado,1,Auto Chofer,car,
+Antofagasta,ModoAgregado,2,Auto Acompañante,car,
+Antofagasta,ModoAgregado,3,Taxi Colectivos,taxi,
+Antofagasta,ModoAgregado,4,Buses-Taxibus,bus,
+Antofagasta,ModoAgregado,5,Taxi Básico o Radiotaxi,taxi,
+Antofagasta,ModoAgregado,6,Bus(particulares),bus,
+Antofagasta,ModoAgregado,7,Caminata,walk,
+Antofagasta,ModoAgregado,8,Bicicletas,bicycle,
+Antofagasta,ModoAgregado,9,Bus Interprovincial,bus,
+Antofagasta,ModoAgregado,10,Otros,other,
+Antofagasta,ModoAgregado,11,Transporte Escolar,van,
