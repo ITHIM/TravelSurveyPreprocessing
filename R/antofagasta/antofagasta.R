@@ -434,8 +434,7 @@ stages_v3_2 <- stages_v3 %>% filter(n > 1) %>%
     # next stage.
     MinutosCaminadosDespues_ok = ifelse(stage_id != n, 
                                    0, MinutosCaminadosDespues)) %>% 
-  # I compute the walking duration at the beginning and end of a stage, and
-  # also the trip main mode.
+  # I compute the walking duration at the beginning and end of a stage
   group_by(household_id, participant_id, trip_id) %>% 
   mutate(MinutosCaminadosAntes_sum = sum(MinutosCaminadosAntes, na.rm = T),
          MinutosCaminadosDespues_sum = sum(MinutosCaminadosDespues_ok, 
@@ -470,7 +469,8 @@ stages_v3_2 <- stages_v3 %>% filter(n > 1) %>%
               trip_purpose, valida, stage_id, stage_mode, stage_duration,
               stage_id_paste, trip_id_paste)
 
-
+#' **Append all stages:**
+#' 
 #' I merge all stages again to create a unique dataset and filter out trips that
 #' are not valid
 stages_ready <- stages_v3_1_ready %>% 
@@ -486,14 +486,14 @@ length(unique(stages_v3$trip_id_paste))
 # Number of trips after processing
 length(unique(stages_v3_1_ready$trip_id_paste)) + 
   length(unique(stages_v3_2$trip_id_paste)) 
-length(unique(stages_ready$trip_id_paste))
+length(unique(stages_ready$trip_id_paste)) # Invalid trips are removed
 
 # Number of stages before processing
 length(unique(stages_v3$stage_id_paste))
 # Number of stages after processing
 length(unique(stages_v3_1_ready$stage_id_paste)) + 
   length(unique(stages_v3_2$stage_id_paste)) 
-length(unique(stages_ready$stage_id_paste))
+length(unique(stages_ready$stage_id_paste)) # Invalid trips are removed
 
 #' ## Create variables for quick report
 #' I need to create some variables to run the report that Lambed developed in 
@@ -522,7 +522,7 @@ report$meta_data[4] <- 2010
 report$meta_data[5] <- "1 day"
 report$meta_data[6] <- "Yes (no duration)" #Stage level data available
 report$meta_data[7] <- "All purpose"#Overall trip purpose
-report$meta_data[8] <- "Yes (not here)" # Short walks to PT
+report$meta_data[8] <- "Yes" # Short walks to PT
 report$meta_data[9] <- "No" # Distance available
 report$meta_data[10] <- "train, motorcycle" # missing modes 
 
@@ -544,7 +544,7 @@ write_csv(report, 'Data/Report/antofagasta/antofagasta_trips.csv')
 #' ## **Processing for ITHIM**
 #' ### Standardize trip modes
 #' There's already a function that standardize these modes so the package can
-#' use these trips. I made sure to use translate trip modes so that the function
+#' use these trips. I made sure to translate trip modes so that the function
 #' works perfectly (take a look at the *original* variable of *smodes* dataframe
 #' in this function).
 
