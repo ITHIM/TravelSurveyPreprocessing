@@ -268,8 +268,8 @@ trips_v2 <- trips %>%
          trip_purpose = purpose$ITHIM[match(PropositoEstraus, purpose$Code)])
 
 #' Check purpose and trip mode
-table(trips_v2$IDModo, trips_v2$trip_mode)
-table(trips_v2$PropositoEstraus, trips_v2$trip_purpose)
+table(trips_v2$IDModo, trips_v2$trip_mode, useNA = "always")
+table(trips_v2$PropositoEstraus, trips_v2$trip_purpose, useNA = "always")
 
 #' Now, each stage needs to be in a single row. The original stage dataset has
 #' walking stages in the same row as the regular stages, so I need to create
@@ -309,6 +309,7 @@ stages_v2 <- stages %>%
 #' priority.
 #' Note: if in other surveys "other" mode indeed means "other", the this step is
 #' not needed.
+#table(stages_v2$trip_mode, stages_v2$stage_mode, useNA = "always")
 stages_v2_other <- stages_v2 %>% 
   filter(trip_mode == "other") %>% 
   group_by(trip_id_paste) %>% 
@@ -324,7 +325,7 @@ stages_v3 <- stages_v2 %>% filter(trip_mode != "other") %>%
 #' dataset but it's not in the trip dataset. Modes such as bicycle would be lost
 #' if I don't correct this. For this reason, when working with single stage
 #' trips, I will use trip_mode as stage_mode (see trip 1018010-1-7 as example).
-#' When working more than 2 stages trips, I will leave them as it is.
+#' When working with more than 2 stages trips, I will leave them as they are.
 #' 
 #' Now I'm going to compute stage duration. The processing is different in trips
 #' with only one main stage (i.e. without counting walking stages) and with more
@@ -360,8 +361,8 @@ stages_v3_1 <- stages_v3 %>% filter(n == 1) %>%
 #' Only in two trips the walking duration is the same or larger than the trip
 #' duration. Since this proportion is small, then I will assume that these
 #' trips didn't have the walking component.
+table(stages_v3_1$need_adjustment)
 table(stages_v3_1$need_adjustment, useNA = "always") / nrow(stages_v3_1)
-#table(stages_v3_1$need_adjustment)
 
 #' *Now, I have to create rows for the walking stages.*
 #' 
@@ -526,7 +527,6 @@ report$meta_data[8] <- "Yes" # Short walks to PT
 report$meta_data[9] <- "No" # Distance available
 report$meta_data[10] <- "train, motorcycle" # missing modes 
 
-
 #' I verify that every trip has the sex and age of the person who did it. Since
 #' the sum of NAs is zero, then I can conclude that every trip has the
 #' information.
@@ -568,7 +568,7 @@ trips_export <- trips_export %>% mutate(
 #' ### Variables to export
 #' Now I filter the columns I need
 trips_export <- trips_export %>% 
-  select(participant_id, age, sex, trip_id, trip_mode, trip_duration,
+  dplyr::select(participant_id, age, sex, trip_id, trip_mode, trip_duration,
          stage_id, stage_mode, stage_duration)
 
 #' ### Export dataset

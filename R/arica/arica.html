@@ -254,8 +254,8 @@ div.tocify {
 <div id="understanding-phase" class="section level1">
 <h1><strong>Understanding phase</strong></h1>
 <pre><code>##           used (Mb) gc trigger  (Mb) max used (Mb)
-## Ncells 1054168 56.3    2197890 117.4  1305468 69.8
-## Vcells 1779982 13.6    8388608  64.0  2208017 16.9</code></pre>
+## Ncells 1054171 56.3    2197657 117.4  1304314 69.7
+## Vcells 1780037 13.6    8388608  64.0  2208093 16.9</code></pre>
 <div id="documentation" class="section level2">
 <h2>Documentation</h2>
 <p>These files are available in the v-drive in the path “V:/Studies/MOVED/HealthImpact/Data/Country/Chile/Travel Surveys/Arica/”. Locally, this documentation is located in “…/Chile/Arica/Trips/Reports”. These files were found in: <a href="http://www.sectra.gob.cl/encuestas_movilidad/encuestas_movilidad.htm" class="uri">http://www.sectra.gob.cl/encuestas_movilidad/encuestas_movilidad.htm</a></p>
@@ -309,7 +309,7 @@ Actualizacion_diag_STU_Arica_Inf_Final.pdf
 <h2>Definition of a trip (pendiente)</h2>
 <ol style="list-style-type: decimal">
 <li><p><em>Trip:</em> All trips without any restriction (<strong>File1</strong> page 7-20)</p></li>
-<li><p><em>Collection:</em> The surveys consists of two steps: 1) Collect household and people information. Here a specific day is assigned to record the trips made. 2) After having assigned a day, people record trips made in that day.</p></li>
+<li><p><em>Collection:</em> The surveys consists of two steps: 1) Collect household and people information. Here a specific day is assigned to record the trips made. 2) After having assigned a day, people record trips made in that day (<strong>File1</strong> page 7-21).</p></li>
 </ol>
 </div>
 <div id="replicate-main-results-from-raw-datasets" class="section level2">
@@ -454,7 +454,7 @@ length(unique(people$participant_id_paste)) == nrow(people)</code></pre>
 <p>In the trip dataset there’s already a classification of trip modes. To create the following table I used the information I found in the data dictionary in the access database (table Modo_Desagregado) and then translated them. This is the result:</p>
 <pre class="r"><code>main_mode &lt;- read_csv(&quot;Data/Standardization/Modes_by_city.csv&quot;) %&gt;% 
   filter(City == &quot;Arica&quot;)</code></pre>
-<pre><code>## Rows: 57 Columns: 6</code></pre>
+<pre><code>## Rows: 68 Columns: 6</code></pre>
 <pre><code>## -- Column specification --------------------------------------------------------
 ## Delimiter: &quot;,&quot;
 ## chr (4): City, VariableName, RawMode, ITHIM
@@ -724,7 +724,7 @@ metro
 <p>Now with respect to trip purpose, there are two different classifications. I decided to use <em>PropositoEstraus</em> because it has the categories we need. This is the result:</p>
 <pre class="r"><code>purpose &lt;- read_csv(&quot;Data/Standardization/Purpose_by_city.csv&quot;) %&gt;% 
   filter(City == &quot;Arica&quot;)</code></pre>
-<pre><code>## Rows: 13 Columns: 5</code></pre>
+<pre><code>## Rows: 16 Columns: 5</code></pre>
 <pre><code>## -- Column specification --------------------------------------------------------
 ## Delimiter: &quot;,&quot;
 ## chr (4): City, VariableName, RawPurpose, ITHIM
@@ -822,26 +822,28 @@ table(n_stages$n, useNA = &quot;always&quot;)</code></pre>
          # classification we can use
          trip_purpose = purpose$ITHIM[match(PropositoEstraus, purpose$Code)])</code></pre>
 <p>Check purpose and trip mode</p>
-<pre class="r"><code>table(trips_v2$IDModo, trips_v2$trip_mode)</code></pre>
-<pre><code>##     
-##      bicycle  bus  car other taxi  van walk
-##   1        0    0 3555     0    0    0    0
-##   2        0    0 2400     0    0    0    0
-##   3        0    0    0     0 2358    0    0
-##   4        0 1946    0     0    0    0    0
-##   5        0    0    0     0  307    0    0
-##   6        0  309    0     0    0    0    0
-##   7        0    0    0     0    0    0 6616
-##   8      385    0    0     0    0    0    0
-##   9        0   13    0     0    0    0    0
-##   10       0    0    0    69    0    0    0
-##   11       0    0    0     0    0  459    0</code></pre>
-<pre class="r"><code>table(trips_v2$PropositoEstraus, trips_v2$trip_purpose)</code></pre>
-<pre><code>##    
-##     other school  work
-##   0     0      0  4310
-##   1     0   3740     0
-##   2 10367      0     0</code></pre>
+<pre class="r"><code>table(trips_v2$IDModo, trips_v2$trip_mode, useNA = &quot;always&quot;)</code></pre>
+<pre><code>##       
+##        bicycle  bus  car other taxi  van walk &lt;NA&gt;
+##   1          0    0 3555     0    0    0    0    0
+##   2          0    0 2400     0    0    0    0    0
+##   3          0    0    0     0 2358    0    0    0
+##   4          0 1946    0     0    0    0    0    0
+##   5          0    0    0     0  307    0    0    0
+##   6          0  309    0     0    0    0    0    0
+##   7          0    0    0     0    0    0 6616    0
+##   8        385    0    0     0    0    0    0    0
+##   9          0   13    0     0    0    0    0    0
+##   10         0    0    0    69    0    0    0    0
+##   11         0    0    0     0    0  459    0    0
+##   &lt;NA&gt;       0    0    0     0    0    0    0    0</code></pre>
+<pre class="r"><code>table(trips_v2$PropositoEstraus, trips_v2$trip_purpose, useNA = &quot;always&quot;)</code></pre>
+<pre><code>##       
+##        other school  work  &lt;NA&gt;
+##   0        0      0  4310     0
+##   1        0   3740     0     0
+##   2    10367      0     0     0
+##   &lt;NA&gt;     0      0     0     0</code></pre>
 <p>Now, each stage needs to be in a single row. The original stage dataset has walking stages in the same row as the regular stages, so I need to create one for each walking stage.</p>
 <p>As I said before, most of the trips have only stage (without counting walking stages), and the processing is different when there’s only one, than when there are more than one. So I have to merge trip information and then create one dataset for trips with only one stage, and other dataset where trips have two or more stages.</p>
 <p>Before I do that, I need to translate stage mode and merge the information about the number of stages per trip. Then I have to make sure that the total walking duration is less that the total duration of the trip</p>
@@ -880,7 +882,8 @@ table(n_stages$n, useNA = &quot;always&quot;)</code></pre>
   left_join(trips_v2[,c(&quot;trip_id_paste&quot;, &quot;trip_duration&quot;, &quot;trip_mode&quot;,
                         &quot;trip_purpose&quot;, &quot;valida&quot;)], by = &quot;trip_id_paste&quot;)</code></pre>
 <p>In this survey, when trip_mode is “other” means that it is a combination of any mode, so by definition is not “other” mode. For this reason I replace the trip mode by using the hierarchy of the stages. In this hierarchy, the lower the number the more priority. For example, a trip that has two stages, taxi and car, will be replaced from “other” to taxi, because taxi has more priority. Note: if in other surveys “other” mode indeed means “other”, the this step is not needed.</p>
-<pre class="r"><code>stages_v2_other &lt;- stages_v2 %&gt;% 
+<pre class="r"><code>#table(stages_v2$trip_mode, stages_v2$stage_mode, useNA = &quot;always&quot;)
+stages_v2_other &lt;- stages_v2 %&gt;% 
   filter(trip_mode == &quot;other&quot;) %&gt;% 
   group_by(trip_id_paste) %&gt;% 
   # Change trip_mode by taking the mode with the minimum value in hierarchy
@@ -889,7 +892,7 @@ table(n_stages$n, useNA = &quot;always&quot;)</code></pre>
 <p>Merge trips with “other” mode with the rest of trips</p>
 <pre class="r"><code>stages_v3 &lt;- stages_v2 %&gt;% filter(trip_mode != &quot;other&quot;) %&gt;% 
   bind_rows(stages_v2_other)</code></pre>
-<p>Note: It is important to note that stage_mode is aggregated in the stage dataset but it’s not in the trip dataset. Modes such as bicycle would be lost if I don’t correct this. For this reason, when working with single stage trips, I will use trip_mode as stage_mode (see trip 5029006-2-3 as example). When working more than 2 stages trips, I will leave them as it is.</p>
+<p>Note: It is important to note that stage_mode is aggregated in the stage dataset but it’s not in the trip dataset. Modes such as bicycle would be lost if I don’t correct this. For this reason, when working with single stage trips, I will use trip_mode as stage_mode (see trip 5029006-2-3 as example). When working with more than 2 stages trips, I will leave them as they are.</p>
 <p>Now I’m going to compute stage duration. The processing is different in trips with only one main stage (i.e. without counting walking stages) and with more than one. In the first case, I will subtract the walking duration from the trip duration and assign this value to the stage. In the second case, I will subtract the walking duration from the trip duration and then this value will be split equally in the number of stages so every stage will have the same duration. This is solution is proposed under the assumption that other stages are not as important as walking stages, so the estimation of duration is not sensible for the analysis.</p>
 <p><strong>Trips with one stage:</strong></p>
 <pre class="r"><code>sum(is.na(stages_v3$MinutosCaminadosAntes))</code></pre>
@@ -898,7 +901,8 @@ table(n_stages$n, useNA = &quot;always&quot;)</code></pre>
 <pre><code>## [1] 0</code></pre>
 <pre class="r"><code>stages_v3_1 &lt;- stages_v3 %&gt;% filter(n == 1) %&gt;% 
   # Compute walking duration
-  mutate(walking_duration = MinutosCaminadosAntes + MinutosCaminadosDespues,
+  mutate(stage_mode = trip_mode, # Correcting stage_mode according to note above
+         walking_duration = MinutosCaminadosAntes + MinutosCaminadosDespues,
          # Create a variable to see which trips need adjustment because the 
          # walking duration is equal to or larger than trip duration. Important
          # to note that this applies to all trips but walking trips.
@@ -913,11 +917,14 @@ table(n_stages$n, useNA = &quot;always&quot;)</code></pre>
          )
   )</code></pre>
 <p>Only in 15 trips the walking duration is the same or larger than the trip duration. Since this proportion is small, then I will assume that these trips didn’t have the walking component.</p>
+<pre class="r"><code>table(stages_v3_1$need_adjustment)</code></pre>
+<pre><code>## 
+##     0     1 
+## 18333    15</code></pre>
 <pre class="r"><code>table(stages_v3_1$need_adjustment, useNA = &quot;always&quot;) / nrow(stages_v3_1)</code></pre>
 <pre><code>## 
 ##            0            1         &lt;NA&gt; 
 ## 0.9991824722 0.0008175278 0.0000000000</code></pre>
-<pre class="r"><code>#table(stages_v3_1$need_adjustment)</code></pre>
 <p><em>Now, I have to create rows for the walking stages.</em></p>
 <p>In trips when the adjustment is needed or in walking trips, there will be a single stage, meaning, no walking component. As a consequence, I leave this trips as they are (won’t add rows)</p>
 <pre class="r"><code>#table(stages_v3_1$trip_mode, stages_v3_1$stage_mode)
@@ -1129,7 +1136,7 @@ report$meta_data[10] &lt;- &quot;train, motorcycle&quot; # missing modes </code>
 <h3>Variables to export</h3>
 <p>Now I filter the columns I need</p>
 <pre class="r"><code>trips_export &lt;- trips_export %&gt;% 
-  select(participant_id, age, sex, trip_id, trip_mode, trip_duration,
+  dplyr::select(participant_id, age, sex, trip_id, trip_mode, trip_duration,
          stage_id, stage_mode, stage_duration)</code></pre>
 </div>
 <div id="export-dataset" class="section level3">
