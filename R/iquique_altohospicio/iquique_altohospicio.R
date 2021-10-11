@@ -190,7 +190,7 @@ mode_stage <-
                        "bicycle", "van"),
              # I give priority to public transport and organize by size
              # This is useful to classify "other" trip_mode, because in this 
-             # suvey "other" means a combination of modes rather than "other"
+             # survey "other" means a combination of modes rather than "other"
              # mode
              Hierarchy = c(5,3,1,2,2,2,1,4,3))
 mode_stage %>% kbl() %>% kable_classic()

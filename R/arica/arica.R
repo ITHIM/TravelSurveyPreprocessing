@@ -128,7 +128,7 @@ people %>%
 #' In table "005-Tabla5" (adding columns in excel). Maybe this is a mistake in 
 #' the document.
 #' 
-#' ### Number of hh and people by sector
+#' ### Number of hh and people by macrozone
 #' Compare this with what is mentioned in page 7-59 (Cuadro 7.17) of **File1**. 
 data.frame(household = hh %>% 
              group_by(IDMacrozona) %>% summarise(Total = sum(Factor)),
@@ -185,7 +185,7 @@ mode_stage <-
              ITHIM = c("walk", "car", "bus", "taxi", "taxi", "metro"),
              # I give priority to public transport and organize by size
              # This is useful to classify "other" trip_mode, because in this 
-             # suvey "other" means a combination of modes rather than "other"
+             # survey "other" means a combination of modes rather than "other"
              # mode
              Hierarchy = c(5,4,2,3,3,1))
 mode_stage %>% kbl() %>% kable_classic()

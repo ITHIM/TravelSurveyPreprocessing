@@ -212,7 +212,7 @@ mode_stage <-
              ITHIM = c("walk", "car", "bus", "taxi", "taxi", "metro"),
              # I give priority to public transport and organize by size
              # This is useful to classify "other" trip_mode, because in this 
-             # suvey "other" means a combination of modes rather than "other"
+             # survey "other" means a combination of modes rather than "other"
              # mode
              Hierarchy = c(5,4,2,3,3,1))
 mode_stage %>% kbl() %>% kable_classic()
@@ -227,7 +227,7 @@ purpose[,-c(1:2)] %>% kbl() %>% kable_classic()
 #' The first two columns have been taken from the dataset and data dictionary,
 #' and the third column is the translation and classification of these motives. 
 #' 
-#' #' ## Information at stage or trip level?
+#' ## Information at stage or trip level?
 #' There is information at stage level although it seems that is not enough 
 #' because of the duration of each stage. The information available is about
 #' minutes walking before and after taking other mode, but there's no
@@ -524,7 +524,7 @@ report$meta_data[5] <- "1 day"
 report$meta_data[6] <- "Yes (no duration)" #Stage level data available
 report$meta_data[7] <- "All purpose"#Overall trip purpose
 report$meta_data[8] <- "Yes" # Short walks to PT
-report$meta_data[9] <- "No" # Distance available
+report$meta_data[9] <- "Yes" # Distance available
 report$meta_data[10] <- "train, motorcycle" # missing modes 
 
 #' I verify that every trip has the sex and age of the person who did it. Since

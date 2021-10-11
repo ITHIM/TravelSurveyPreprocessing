@@ -180,7 +180,7 @@ mode_stage <-
              ITHIM = c("walk", "car", "bus", "taxi", "taxi", "metro"),
              # I give priority to public transport and organize by size
              # This is useful to classify "other" trip_mode, because in this 
-             # suvey "other" means a combination of modes rather than "other"
+             # survey "other" means a combination of modes rather than "other"
              # mode
              Hierarchy = c(5,4,2,3,3,1))
 mode_stage %>% kbl() %>% kable_classic()

@@ -147,8 +147,6 @@ data.frame(household = hh %>%
 #' ### Mode share
 #' Compare this with what is mentioned in page 11-102 (Cuadro 11.15-19) of 
 #' **File1**. 
-#' 
-#' I tried to bring factors from people dataset but I couldn't replicate results
 trips2 <- trips %>% left_join(factor, by = c("IDFolio", "IDPersona"))
 # sum(trips2$FactorExpZonal, na.rm = T)
 # sum(trips2$FactorExpSocioEcon, na.rm = T)
@@ -195,7 +193,7 @@ mode_stage <-
              ITHIM = c("walk", "car", "bus", "taxi", "taxi", "metro"),
              # I give priority to public transport and organize by size
              # This is useful to classify "other" trip_mode, because in this 
-             # suvey "other" means a combination of modes rather than "other"
+             # survey "other" means a combination of modes rather than "other"
              # mode
              Hierarchy = c(5,4,2,3,3,1))
 mode_stage %>% kbl() %>% kable_classic()
