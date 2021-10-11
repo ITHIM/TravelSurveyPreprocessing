@@ -41,7 +41,7 @@ data.frame(
            "")
 ) %>% kbl() %>% kable_classic()
 
-#' ## Definition of a trip (pendiente)
+#' ## Definition of a trip 
 #' 1. *Trip:* All trips without any restriction (**File1** page 7-20)
 #' 
 #' 2. *Collection:* The surveys consists of two steps: 1) Collect household and
