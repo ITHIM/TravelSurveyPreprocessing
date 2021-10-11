@@ -290,8 +290,8 @@ stages_v2 <- stages %>%
 #' the number the more priority. For example, a trip that has two stages, taxi
 #' and car, will be replaced from "other" to taxi, because taxi has more
 #' priority.
-#' Note: if in other surveys "other" mode indeed means "other", the this step is
-#' not needed.
+#' Note: if in other surveys "other" mode indeed means "other", then this step
+#' is not needed.
 #table(stages_v2$trip_mode, stages_v2$stage_mode, useNA = "always")
 stages_v2_other <- stages_v2 %>% 
   filter(trip_mode == "other") %>% 

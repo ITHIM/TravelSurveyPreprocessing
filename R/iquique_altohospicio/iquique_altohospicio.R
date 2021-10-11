@@ -80,7 +80,7 @@ standardize_modes <- function(trip, mode){
 }
 
 #' ### Importing datasets
-#' In page 7-41 of **File1** there's a data dictionary.
+#' In page 6-44 of **File1** there's a data dictionary.
 #' I ran everything local because it is faster, but if someone wants to run this
 #' script, then only the path needs to be changed.
 #' I exported these excel files from the access database, because I couldn't 
@@ -88,7 +88,7 @@ standardize_modes <- function(trip, mode){
 # V-Drive folder
 #path <- "V:/Studies/MOVED/HealthImpact/Data/Country/Chile/Travel Surveys/Iquique_AltoHospicio/"
 # Local folder
-path <- "C:/Users/danie/Documents/Daniel_Gil/Consultorias/2020/WorldBank/Data/Chile/Iquique_AltoHospicio/Trips/"
+path <- "C:/Users/danie/Documents/Daniel_Gil/Consultorias/2021/Cambridge/Data/Chile/Iquique_AltoHospicio/Trips/"
 
 #+ warning=FALSE, message=FALSE, cache=TRUE
 # Households (hh)
@@ -285,8 +285,8 @@ stages_v2 <- stages %>%
 #' the number the more priority. For example, a trip that has two stages, taxi
 #' and car, will be replaced from "other" to taxi, because taxi has more
 #' priority.
-#' Note: if in other surveys "other" mode indeed means "other", the this step is
-#' not needed.
+#' Note: if in other surveys "other" mode indeed means "other", then this step
+#' is not needed.
 #table(stages_v2$trip_mode, stages_v2$stage_mode, useNA = "always")
 stages_v2_other <- stages_v2 %>% 
   filter(trip_mode == "other") %>% 

@@ -1,5 +1,5 @@
 #' ---
-#' title: "Preprocessing of Antofagasta's travel dataset"
+#' title: "Preprocessing of Osorno's travel dataset"
 #' author: "Daniel"
 #' output:
 #'   html_document:
@@ -26,29 +26,27 @@ rm(list = ls());gc()
 options(scipen = 50)
 
 #' ## Documentation
-#' These files are available in the v-drive in the path "V:/Studies/MOVED/HealthImpact/Data/Country/Chile/Travel Surveys/Antofagasta/". Locally, this documentation is located in ".../Chile/Antofagasta/Trips/Reports".
+#' These files are available in the v-drive in the path "V:/Studies/MOVED/HealthImpact/Data/Country/Chile/Travel Surveys/Osorno/". Locally, this documentation is located in ".../Chile/Osorno/Trips/Reports".
 #' These files were found in: http://www.sectra.gob.cl/encuestas_movilidad/encuestas_movilidad.htm
 #'
 #' From now on: 
 #+ warning=FALSE, message=FALSE, echo=FALSE
 data.frame(
   Reference = c("File1", ""),
-  Description = c("Final report Vol. 1",
+  Description = c("Technical report and final results",
                   ""),
-  Title = c("ACTUALIZACIÓN DIAGNÓSTICO DEL S.T.U. DE LA CIUDAD DE ANTOFAGASTA",
+  Title = c("Actualización Plan de Transporte Osorno y Desarrollo de Anteproyecto",
             ""),
-  File = c("Actualiz_diag_STU_Antofagasta_Inf_Final.pdf",
+  File = c("Actualizacion_Plan_Transporte_Osorno_Inf_Final.pdf",
            "")
 ) %>% kbl() %>% kable_classic()
 
 #' ## Definition of a trip 
-#' 1. *Trip:* All trips without any restriction (**File1** page 7-18)
+#' 1. *Trip:* All trips without any restriction (**File1** page 9-17)
 #' 
 #' 2. *Collection:* Some people were asked about trips made in a day during the
 #' week, other about trips made on Saturdays and other about trips made on
-#' Sundays.(Page 7-20 of **File1**). When the trips are collected during the
-#' week, they asked respondents to fill the trips of the day after the first
-#' visit (Page 7-35)
+#' Sundays.(Page 9-15 of **File1**). 
 #' 
 #' 
 #' ## Replicate main results from raw datasets
@@ -81,15 +79,15 @@ standardize_modes <- function(trip, mode){
 }
 
 #' ### Importing datasets
-#' In page 7-37 of **File1** there's a data dictionary.
+#' In page 9-10 (page 299 pdf) of **File1** there's a data dictionary.
 #' I ran everything local because it is faster, but if someone wants to run this
 #' script, then only the path needs to be changed.
 #' I exported these excel files from the access database, because I couldn't 
 #' read them directly from the database
 # V-Drive folder
-#path <- "V:/Studies/MOVED/HealthImpact/Data/Country/Chile/Travel Surveys/Antofagasta/"
+#path <- "V:/Studies/MOVED/HealthImpact/Data/Country/Chile/Travel Surveys/Osorno/"
 # Local folder
-path <- "C:/Users/danie/Documents/Daniel_Gil/Consultorias/2021/Cambridge/Data/Chile/Antofagasta/Trips/"
+path <- "C:/Users/danie/Documents/Daniel_Gil/Consultorias/2021/Cambridge/Data/Chile/Osorno/Trips/"
 
 #+ warning=FALSE, message=FALSE, cache=TRUE
 # Households (hh)
@@ -98,11 +96,9 @@ hh <- read_excel(paste0(path, "Hogar.xlsx"))
 #+ warning=FALSE, message=FALSE, cache=TRUE
 # People
 people <- read_excel(paste0(path, "Persona.xlsx"))
-factor <- read_excel(paste0(path, "FactorExpansionPersona.xlsx"))
-age <- read_excel(paste0(path, "Edad de personas.xlsx"))
-#names(people)
-#names(age)
-people <- people %>% left_join(age, by = c("IDFolio", "IDPersona" = "IDPERSONA"))
+
+# Vehicles
+#vehicles <- read_excel(paste0(path, "Vehiculo.xlsx"))
 
 #+ warning=FALSE, message=FALSE, cache=TRUE
 # Trips
@@ -115,74 +111,46 @@ stages <- read_excel(paste0(path, "Etapa.xlsx"))
 
 #' ### Number households and people
 #' The first thing to do is verify that the number of hh and people is 
-#' the same to what is mentioned in the document 
-sum(hh$Factor) # Same as in Cuadro 7-14 of **File1**.
-sum(people$Factor) # Same as in Cuadro 7-12 of **File1**.
-sum(factor$FactorExpansion)
-sum(factor$FactorExpZonal)
-sum(factor$FactorExpTamHogar)
-sum(factor$FactorExpSocioEcon)
-
-people %>% group_by(IDSexo) %>% 
-  summarise(sexo = sum(Factor, na.rm = T)) # Same as in Cuadro 7-12 of **File1**.
-#' In *IDSexo* 1: Male and 2:Female. Results are the same.
+#' the same to what is mentioned in page 9-5 (Cuadro 13.7 (pag 304 pdf)) of
+#'  **File1**.
+sum(hh$Factor)
+sum(people$Factor)
+#' Results are the same.
 #' 
 #' ### Number of people by education
-#' Compare this with what is mentioned in page 7-53 (Cuadro 7-16) of **File1**.
+#' Compare this with what is mentioned in page page 9-7 (Cuadro 13.8 
+#' (pag 306 pdf)) of **File1**. 
 people %>% 
   group_by(IDEstudios) %>% summarise(Total = sum(Factor))
-#' Number of people in University is not the same as in the table
-
-#' ### Number of people by macrozona
-#' Compare this with what is mentioned in page 7-54 (Cuadro 7-19) of **File1**.
-people %>% left_join(hh[,c("IDFolio", "IDMacrozona")], by = "IDFolio") %>% 
-  group_by(IDMacrozona) %>% summarise(Total = sum(Factor))
 #' Results are the same
-#' Macrozona:
-#' 1: Centro
-#' 2: Centro sur
-#' 3: Centro norte
-#' 4: Centro oriente
-#' 5: Industrial
-#' 6: Oriente
-#' 7: Norte
-#' 8: Sur
 #' 
-#' ### Number of trips by type
-#' Compare this with what is mentioned in page 7-53 (Cuadro 7-18) of **File1**.
-#' IDModoAgregado
-#' 1. Transporte privado
-#' 2. Transporte publico
-#' 3. Transporte Combinado
-#' 4. No Motorizado
-#' 5. Caminata
+#' ### Number of people by macrozone
+#' Compare this with what is mentioned in page 9-10 (Cuadro 13.11 
+#' (pag 309 pdf)) of **File1**. 
+#' **File1**. 
+data.frame(household = hh %>% 
+             group_by(IDMacrozona) %>% summarise(Total = sum(Factor)),
+           n_people =  people %>% 
+             left_join(hh[, c("IDFolio", "IDMacrozona")], by = "IDFolio") %>% 
+             group_by(IDMacrozona)  %>% summarise(Total = sum(Factor))
+)
+#' Results are the same.
 #' 
-#' I tried to bring factors from people dataset and realized that results are 
-#' the same when I filter rows where "valida" == 1.
-trips2 <- trips %>% left_join(factor, by = c("IDFolio" = "IDfolio", "IdPersona"))
-trips2 %>% group_by(valida) %>% summarise(tot = sum(FactorExpZonal, na.rm = T))
-# sum(trips2$FactorExpZonal, na.rm = T)
-# sum(trips2$FactorExpSocioEcon, na.rm = T)
-# sum(trips2$FactorExpTamHogar, na.rm = T)
-# sum(trips2$FactorExpansion, na.rm = T)
-
-
 #' ### Mode share
-#' Compare this with what is mentioned in page 7-72 (7-37) of **File1**
-trips2 %>% filter(valida == 1) %>% group_by(IDModo) %>% 
-  summarise(tot = sum(FactorExpZonal, na.rm = T))
+#' Compare this with what is mentioned in page 9-48 (Cuadro 13.29 
+#' (pag 347 pdf)) of **File1**.  
+sum(trips[trips$valida == 1, "Factor"])
+trips %>% filter(valida == 1) %>% 
+  group_by(IDModo) %>% summarise(Total = sum(Factor))
 
 #' Results are the same. Important here is that is important to filter only
 #' valid trips, which can be identified by the column "valida == 1".
 #' 
 #' # **Preprocessing phase**
-#' ## Filtering people from Antofagasta
-#' Since the survey was conducted in only Antofagasta (page 3-1 of **File1**)
-#' and there's information in this same coverage about injuries, then I won't
-#' filter any trip. 
-#' 
-#' Note: According to page 3-1 of **File1** the survey cover only comuna
-#' Antofagasta
+#' ## Filtering people from Osorno only
+#' Since the survey was conducted in only comuna Osorno
+#' (page 2-1 of **File1**)and there's information in this same coverage about
+#' injuries, then I won't filter any trip. 
 #' 
 #' I just verify that there are no duplicates in people dataset
 people <- people %>% 
@@ -192,42 +160,47 @@ length(unique(people$participant_id_paste)) == nrow(people)
 #' ## Classification and translation of trip modes
 #' In the trip dataset there's already a classification of trip modes. To create
 #' the following table I used the information I found in the data dictionary in
-#' the access database (table Modo_Desagregado) and then translated them. 
+#' the access database (table Modo_Desagregado) and then translated them.
 #' This is the result:
 main_mode <- read_csv("Data/Standardization/Modes_by_city.csv") %>% 
-  filter(City == "Antofagasta")
+  filter(City == "Osorno")
 main_mode[,-c(1:2,6)] %>% kbl() %>% kable_classic()
 
+#' As a side note, when using this file for ITHIM the first time I had to change
+#' "other" as "motorcycle" because the motorcycle injuries were removed and an
+#' error appear in the package. It is important to have this in mind.
+#' 
 #' The stage table has modes coded in a different way. The meaning of each code 
 #' is presented in table ModoEtapa, in the access database. Here I just
 #' translated them:
 mode_stage <- 
-  data.frame(Code = 1:6,
+  data.frame(Code = 1:7,
              ModoEtapa = c("A pie", 
                            "Auto, Moto u Otro (Bicicleta, Camión, etc.)",
                            "Micro, Bus o Taxibus",
                            "Taxi Colectivo",
                            "Taxi Básico o Radiotaxi",
-                           "Tren o Metrotren"),
-             ITHIM = c("walk", "car", "bus", "taxi", "taxi", "metro"),
+                           "Tren o Metrotren",
+                           "Barcaza"),
+             ITHIM = c("walk", "car", "bus", "taxi", "taxi", "metro", "other"),
              # I give priority to public transport and organize by size
              # This is useful to classify "other" trip_mode, because in this 
              # suvey "other" means a combination of modes rather than "other"
              # mode
-             Hierarchy = c(5,4,2,3,3,1))
+             Hierarchy = c(5,4,2,3,3,1,6))
 mode_stage %>% kbl() %>% kable_classic()
 
 #' Now with respect to trip purpose, there are two different classifications.
 #' I decided to use *PropositoEstraus* because it has the categories we need.
 #' This is the result:
 purpose <- read_csv("Data/Standardization/Purpose_by_city.csv") %>% 
-  filter(City == "Antofagasta")
+  filter(City == "Osorno")
 purpose[,-c(1:2)] %>% kbl() %>% kable_classic()
 
 #' The first two columns have been taken from the dataset and data dictionary,
-#' and the third column is the translation and classification of these motives. 
+#' and the third column is the translation and classification of these motives.
 #' 
-#' #' ## Information at stage or trip level?
+#' ## Information at stage or trip level?
 #' There is information at stage level although it seems that is not enough 
 #' because of the duration of each stage. The information available is about
 #' minutes walking before and after taking other mode, but there's no
@@ -250,7 +223,7 @@ stages <- stages %>%
                                 IDEtapa, sep = "-"))
 length(unique(stages$stage_id_paste)) == nrow(stages) # OK
 
-#'Less than 1% of trips have more than 1 stage
+#'Over 2% of trips have more than 1 stage
 n_stages <- stages %>% count(IDFolio, IDPersona, IDViaje)
 table(n_stages$n, useNA = "always")
 table(n_stages$n, useNA = "always") / nrow(n_stages)
@@ -307,7 +280,7 @@ stages_v2 <- stages %>%
 #' the number the more priority. For example, a trip that has two stages, taxi
 #' and car, will be replaced from "other" to taxi, because taxi has more
 #' priority.
-#' Note: if in other surveys "other" mode indeed means "other", then this step 
+#' Note: if in other surveys "other" mode indeed means "other", then this step
 #' is not needed.
 #table(stages_v2$trip_mode, stages_v2$stage_mode, useNA = "always")
 stages_v2_other <- stages_v2 %>% 
@@ -320,11 +293,11 @@ stages_v2_other <- stages_v2 %>%
 #' Merge trips with "other" mode with the rest of trips
 stages_v3 <- stages_v2 %>% filter(trip_mode != "other") %>% 
   bind_rows(stages_v2_other)
-  
+
 #' Note: It is important to note that stage_mode is aggregated in the stage
 #' dataset but it's not in the trip dataset. Modes such as bicycle would be lost
 #' if I don't correct this. For this reason, when working with single stage
-#' trips, I will use trip_mode as stage_mode (see trip 1018010-1-7 as example).
+#' trips, I will use trip_mode as stage_mode (see trip 1009006-3-3 as example).
 #' When working with more than 2 stages trips, I will leave them as they are.
 #' 
 #' Now I'm going to compute stage duration. The processing is different in trips
@@ -355,10 +328,10 @@ stages_v3_1 <- stages_v3 %>% filter(n == 1) %>%
                                         trip_duration - walking_duration,
                                         trip_duration),
                                  trip_duration # Walking stages
-                                 )
          )
-  
-#' Only in two trips the walking duration is the same or larger than the trip
+  )
+
+#' Only in 51 trips the walking duration is the same or larger than the trip
 #' duration. Since this proportion is small, then I will assume that these
 #' trips didn't have the walking component.
 table(stages_v3_1$need_adjustment)
@@ -434,7 +407,7 @@ stages_v3_2 <- stages_v3 %>% filter(n > 1) %>%
     # walking duration is the same as the before-stage walking duration of the
     # next stage.
     MinutosCaminadosDespues_ok = ifelse(stage_id != n, 
-                                   0, MinutosCaminadosDespues)) %>% 
+                                        0, MinutosCaminadosDespues)) %>% 
   # I compute the walking duration at the beginning and end of a stage
   group_by(household_id, participant_id, trip_id) %>% 
   mutate(MinutosCaminadosAntes_sum = sum(MinutosCaminadosAntes, na.rm = T),
@@ -462,13 +435,13 @@ stages_v3_2 <- stages_v3 %>% filter(n > 1) %>%
   #          grp = with(rle(id_viaje), rep(seq_along(lengths), lengths))) %>%
   group_by(trip_id_paste) %>%
   mutate(stage_id = seq_len(dplyr::n()),
-        # Recreate stage_id_paste
+         # Recreate stage_id_paste
          stage_id_paste = paste(household_id, participant_id, trip_id, 
                                 stage_id, sep = "-")) %>% 
   ungroup() %>% 
   dplyr::select(household_id, participant_id, trip_id, trip_mode, trip_duration,
-              trip_purpose, valida, stage_id, stage_mode, stage_duration,
-              stage_id_paste, trip_id_paste)
+                trip_purpose, valida, stage_id, stage_mode, stage_duration,
+                stage_id_paste, trip_id_paste)
 
 #' **Append all stages:**
 #' 
@@ -506,7 +479,7 @@ report <- people %>%
   mutate(cluster_id = 1,
          household_id = IDFolio,
          participant_id = IDPersona,
-         age = Edad,
+         age = 2013 - AgnoNacimiento, #survey is from 2013,
          sex = ifelse(IDSexo == 1, "Male", "Female"),
          participant_wt = Factor,
          meta_data = NA) %>% 
@@ -514,17 +487,17 @@ report <- people %>%
                 participant_wt,
                 trip_id, trip_mode, trip_duration, trip_purpose,
                 stage_id, stage_mode, stage_duration, 
-                stage_id_paste, trip_id_paste, meta_data) 
+                stage_id_paste, trip_id_paste, meta_data)
 
-report$meta_data[1] <- 352638 # Population in 2017
-report$meta_data[2] <- 999999 
+report$meta_data[1] <- 161460 # Population in 2017
+report$meta_data[2] <- 999999
 report$meta_data[3] <- "Travel Survey"
-report$meta_data[4] <- 2010
+report$meta_data[4] <- 2013
 report$meta_data[5] <- "1 day"
 report$meta_data[6] <- "Yes (no duration)" #Stage level data available
 report$meta_data[7] <- "All purpose"#Overall trip purpose
 report$meta_data[8] <- "Yes" # Short walks to PT
-report$meta_data[9] <- "No" # Distance available
+report$meta_data[9] <- "Yes" # Short walks to PT
 report$meta_data[10] <- "train, motorcycle" # missing modes 
 
 #' I verify that every trip has the sex and age of the person who did it. Since
@@ -536,10 +509,11 @@ sum(is.na(report$trip_id))
 sum(is.na(report$trip_duration))
 sum(is.na(report$trip_mode))
 sum(is.na(report$stage_id))
+table(people$NumeroViajes)
 
 #' # **Exporting phase**
 #' Export dataset to make the report
-write_csv(report, 'Data/Report/antofagasta/antofagasta_trips.csv')
+write_csv(report, 'Data/Report/osorno/osorno_trips.csv')
 
 #' ## **Processing for ITHIM**
 #' ### Standardize trip modes
@@ -561,7 +535,7 @@ trips_export <- trips_export %>% mutate(
                                               participant_id, sep = "_"))),
   trip_id = ifelse(is.na(trip_mode), NA,
                    as.integer(as.factor(paste(cluster_id, household_id,
-                                       participant_id, trip_id, sep = "_")))))
+                                        participant_id, trip_id, sep = "_")))))
 
 #sapply(trips_export, function(x) sum(is.na(x)))
 
@@ -569,7 +543,8 @@ trips_export <- trips_export %>% mutate(
 #' Now I filter the columns I need
 trips_export <- trips_export %>% 
   dplyr::select(participant_id, age, sex, trip_id, trip_mode, trip_duration,
-         stage_id, stage_mode, stage_duration)
+                stage_id, stage_mode, stage_duration)
 
 #' ### Export dataset
-write_csv(trips_export, 'Data/ITHIM/antofagasta/trips_antofagasta.csv')
+write_csv(trips_export, 'Data/ITHIM/osorno/trips_osorno.csv')
+
