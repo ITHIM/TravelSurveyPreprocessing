@@ -121,3 +121,14 @@ SanAntonio,Modo,9,09. Motocicleta,motorcycle,9
 SanAntonio,Modo,10,10. Bus institucional o particular,bus,2
 SanAntonio,Modo,11,11. Bus interurbano o rural,bus,3
 SanAntonio,Modo,12,12. Servicio informal,other,12
+Temuco,Modo_Desagregado,1,Auto Chofer,car,
+Temuco,Modo_Desagregado,2,Auto Acompañante,car,
+Temuco,Modo_Desagregado,3,Taxi Colectivos,taxi,
+Temuco,Modo_Desagregado,4,Buses-Taxibus,bus,
+Temuco,Modo_Desagregado,5,Taxi Básico o Radiotaxi,taxi,
+Temuco,Modo_Desagregado,6,Bus(particulares),bus,
+Temuco,Modo_Desagregado,7,Caminata,walk,
+Temuco,Modo_Desagregado,8,Bicicletas,bicycle,
+Temuco,Modo_Desagregado,9,Bus Interprovincial,bus,
+Temuco,Modo_Desagregado,10,Otros,other,
+Temuco,Modo_Desagregado,11,Transporte Escolar,van,

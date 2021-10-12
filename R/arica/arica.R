@@ -87,7 +87,7 @@ standardize_modes <- function(trip, mode){
 # V-Drive folder
 #path <- "V:/Studies/MOVED/HealthImpact/Data/Country/Chile/Travel Surveys/Arica/"
 # Local folder
-path <- "C:/Users/danie/Documents/Daniel_Gil/Consultorias/2020/WorldBank/Data/Chile/Arica/Trips/"
+path <- "C:/Users/danie/Documents/Daniel_Gil/Consultorias/2021/Cambridge/Data/Chile/Arica/Trips/"
 
 #+ warning=FALSE, message=FALSE, cache=TRUE
 # Households (hh)
