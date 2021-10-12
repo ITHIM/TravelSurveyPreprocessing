@@ -7,7 +7,7 @@
 #'     toc_float: true
 #' ---
 
-#' Note: in order to create the markdown properly from this file, Rstudio options need to be changed. Tools > Global Options > R Markdown > Evaluate chunks in directory > Current. By default this option is set to *Document*, but here I need to change it to *Current* so everything works as expected.
+#' Note: in order to create the markdown properly from this file, Rstudio options need to be changed. Tools > Global Options > R Markdown > Evaluate chunks in directory > Current. By default this option is set to *Document*, but here you need to change it to *Current* so everything works as expected.
 #' 
 #' 
 #' # **Understanding phase**

@@ -7,7 +7,7 @@
 #'     toc_float: true
 #' ---
 
-#' Note: in order to create the markdown properly from this file, Rstudio options need to be changed. Tools > Global Options > R Markdown > Evaluate chunks in directory > Current. By default this option is set to *Document*, but here I need to change it to *Current* so everything works as expected.
+#' Note: in order to create the markdown properly from this file, Rstudio options need to be changed. Tools > Global Options > R Markdown > Evaluate chunks in directory > Current. By default this option is set to *Document*, but here you need to change it to *Current* so everything works as expected.
 #' 
 #' 
 #' # **Understanding phase**
@@ -145,7 +145,8 @@ trips %>% filter(valida == 1) %>%
   group_by(IDModo) %>% summarise(Total = sum(Factor))
 #' Results are not the same to the document, but they are the same to 
 #' "Tabla 13-035" in the access database (adding rows in excel). Maybe this is a
-#' mistake in the document.
+#' mistake in the document. Important here is that is important to filter only
+#' valid trips, which can be identified by the column "valida == 1".
 #' 
 #' # **Preprocessing phase**
 #' ## Filtering people from Puerto Montt only 

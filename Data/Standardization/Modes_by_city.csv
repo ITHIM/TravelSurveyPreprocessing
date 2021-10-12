@@ -109,3 +109,15 @@ PuertoMontt,Modo_Desagregado,8,Bicicletas,bicycle,
 PuertoMontt,Modo_Desagregado,9,Bus Interprovincial,bus,
 PuertoMontt,Modo_Desagregado,10,Otros,other,
 PuertoMontt,Modo_Desagregado,11,Transporte Escolar,van,
+SanAntonio,Modo,1,01. Auto,car,7
+SanAntonio,Modo,2,02. Bus urbano,bus,1
+SanAntonio,Modo,3,03. Taxi Colectivo Urbano,taxi,4
+SanAntonio,Modo,4,04. Taxi Colectivo Rural,taxi,5
+SanAntonio,Modo,5,05. Transporte escolar,van,8
+SanAntonio,Modo,6,06. Taxi o radiotaxi,taxi,6
+SanAntonio,Modo,7,07. Enteramente a pie,walk,11
+SanAntonio,Modo,8,08. Bicicleta,bicycle,10
+SanAntonio,Modo,9,09. Motocicleta,motorcycle,9
+SanAntonio,Modo,10,10. Bus institucional o particular,bus,2
+SanAntonio,Modo,11,11. Bus interurbano o rural,bus,3
+SanAntonio,Modo,12,12. Servicio informal,other,12
