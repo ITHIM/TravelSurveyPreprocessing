@@ -1,39 +1,4 @@
 ﻿City,VariableName,Code,RawMode,ITHIM,Hierarchy
-Santiago,,16,Tren,train,1
-Santiago,,4,Metro,metro,2
-Santiago,,3,Bus troncal,bus,3
-Santiago,,2,Bus alimentador,bus,4
-Santiago,,11,Bus institucional,bus,5
-Santiago,,12,Bus interurbano o rural,bus,6
-Santiago,,14,Bus urbano con pago al conductor (Metrobus y otros),bus,7
-Santiago,,7,Taxi o radiotaxi,taxi,8
-Santiago,,5,Taxi colectivo,taxi,9
-Santiago,,1,Auto Chofer,car,10
-Santiago,,17,Auto Acompañante,car,11
-Santiago,,13,"Furgón escolar, como chofer o acompañante",van,12
-Santiago,,6,"Furgón escolar, como pasajero",van,13
-Santiago,,10,Motocicleta,motorcycle,14
-Santiago,,18,Motocicleta Acompañante,motorcycle,15
-Santiago,,9,Bicicleta,bicycle,16
-Santiago,,8,Enteramente a pie,walk,17
-Santiago,,15,Servicio Informal,other,18
-Valparaiso,,4,Metro Valparaíso ,metro,1
-Valparaiso,,3,Bus urbano ,bus,2
-Valparaiso,,13,Bus institucional o particular ,bus,3
-Valparaiso,,14,Bus interurbano o rural ,bus,4
-Valparaiso,,17,Trolebús ,bus,5
-Valparaiso,,5,Taxi Colectivo ,taxi,6
-Valparaiso,,8,Taxi o radiotaxi ,taxi,7
-Valparaiso,,1,Auto acompañante,car,8
-Valparaiso,,2,Auto chofer,car,9
-Valparaiso,,6,Furgón escolar pasajero,van,10
-Valparaiso,,7,Furgón escolar chofer,van,11
-Valparaiso,,11,Motocicleta chofer,motorcycle,12
-Valparaiso,,12,Motocicleta acompañante,motorcycle,13
-Valparaiso,,10,Bicicleta ,bicycle,14
-Valparaiso,,9,Caminata,walk,15
-Valparaiso,,15,Servicio informal ,other,16
-Valparaiso,,16,Ascensor ,other,17
 Antofagasta,Modo_Desagregado,1,Auto Chofer,car,
 Antofagasta,Modo_Desagregado,2,Auto Acompañante,car,
 Antofagasta,Modo_Desagregado,3,Taxi Colectivos,taxi,
@@ -144,3 +109,20 @@ Valdivia,Modo_Desagregado,9,Bus Interprovincial,bus,
 Valdivia,Modo_Desagregado,10,Otros,other,
 Valdivia,Modo_Desagregado,11,Transporte Escolar,van,
 Valdivia,Modo_Desagregado,12,Barcaza,other,
+GranValparaiso,ModoEtapa,1,Auto acompañante,car,8
+GranValparaiso,ModoEtapa,2,Auto chofer,car,9
+GranValparaiso,ModoEtapa,3,Bus urbano ,bus,2
+GranValparaiso,ModoEtapa,4,Metro Valparaíso ,metro,1
+GranValparaiso,ModoEtapa,5,Taxi Colectivo ,taxi,6
+GranValparaiso,ModoEtapa,6,Furgón escolar pasajero,van,10
+GranValparaiso,ModoEtapa,7,Furgón escolar chofer,van,11
+GranValparaiso,ModoEtapa,8,Taxi o radiotaxi ,taxi,7
+GranValparaiso,ModoEtapa,9,Caminata,walk,15
+GranValparaiso,ModoEtapa,10,Bicicleta ,bicycle,14
+GranValparaiso,ModoEtapa,11,Motocicleta chofer,motorcycle,12
+GranValparaiso,ModoEtapa,12,Motocicleta acompañante,motorcycle,13
+GranValparaiso,ModoEtapa,13,Bus institucional o particular ,bus,3
+GranValparaiso,ModoEtapa,14,Bus interurbano o rural ,bus,4
+GranValparaiso,ModoEtapa,15,Servicio informal ,other,16
+GranValparaiso,ModoEtapa,16,Ascensor ,other,17
+GranValparaiso,ModoEtapa,17,Trolebús ,bus,5
