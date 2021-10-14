@@ -126,3 +126,21 @@ GranValparaiso,ModoEtapa,14,Bus interurbano o rural ,bus,4
 GranValparaiso,ModoEtapa,15,Servicio informal ,other,16
 GranValparaiso,ModoEtapa,16,Ascensor ,other,17
 GranValparaiso,ModoEtapa,17,Trolebús ,bus,5
+Santiago,Modo,1,Auto Chofer,car,10
+Santiago,Modo,2,Bus alimentador,bus,4
+Santiago,Modo,3,Bus troncal,bus,3
+Santiago,Modo,4,Metro,metro,2
+Santiago,Modo,5,Taxi colectivo,taxi,9
+Santiago,Modo,6,"Furgón escolar, como pasajero",van,13
+Santiago,Modo,7,Taxi o radiotaxi,taxi,8
+Santiago,Modo,8,Enteramente a pie,walk,17
+Santiago,Modo,9,Bicicleta,bicycle,16
+Santiago,Modo,10,Motocicleta,motorcycle,14
+Santiago,Modo,11,Bus institucional,bus,5
+Santiago,Modo,12,Bus interurbano o rural,bus,6
+Santiago,Modo,13,"Furgón escolar, como chofer o acompañante",van,12
+Santiago,Modo,14,Bus urbano con pago al conductor (Metrobus y otros),bus,7
+Santiago,Modo,15,Servicio Informal,other,18
+Santiago,Modo,16,Tren,train,1
+Santiago,Modo,17,Auto Acompañante,car,11
+Santiago,Modo,18,Motocicleta Acompañante,motorcycle,15

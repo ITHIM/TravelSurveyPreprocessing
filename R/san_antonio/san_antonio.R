@@ -419,8 +419,7 @@ stages_v3_2 <- stages_v3 %>% filter(n > 1) %>%
 
 #' **Append all stages:**
 #' 
-#' I merge all stages again to create a unique dataset and filter out trips that
-#' are not valid
+#' I merge all stages again to create a unique dataset
 stages_ready <- stages_v3_1_ready %>% 
   bind_rows(stages_v3_2) %>% 
   arrange(household_id, participant_id, trip_id, stage_id) 
