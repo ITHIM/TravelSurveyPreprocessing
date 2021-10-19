@@ -36,3 +36,14 @@ Santiago,PropositoAgregado,1,Trabajo,work
 Santiago,PropositoAgregado,2,Estudio,school
 Santiago,PropositoAgregado,3,Otro,other
 Santiago,PropositoAgregado,7,Volver a casa,return
+Medellin,MOTIVO_VIAJE,1,Al Trabajo,work
+Medellin,MOTIVO_VIAJE,2,Estudio ,school
+Medellin,MOTIVO_VIAJE,3,Regreso a casa,return
+Medellin,MOTIVO_VIAJE,4,Almuerzo,other
+Medellin,MOTIVO_VIAJE,5,Compras,other
+Medellin,MOTIVO_VIAJE,6,Salud,other
+Medellin,MOTIVO_VIAJE,7,Recreación,other
+Medellin,MOTIVO_VIAJE,8,Diligencia o trámite,other
+Medellin,MOTIVO_VIAJE,9,Acompañar a alguien,other
+Medellin,MOTIVO_VIAJE,10,Recoger o dejar a alguien ,other
+Medellin,MOTIVO_VIAJE,11,Otro                          ,other

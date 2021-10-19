@@ -144,3 +144,46 @@ Santiago,Modo,15,Servicio Informal,other,18
 Santiago,Modo,16,Tren,train,1
 Santiago,Modo,17,Auto Acompañante,car,11
 Santiago,Modo,18,Motocicleta Acompañante,motorcycle,15
+Medellin,MODO_TTE_E1,,Metro,metro,1
+Medellin,MODO_TTE_E1,,Tranvía,metro,2
+Medellin,MODO_TTE_E1,,MetroPlus,bus,3
+Medellin,MODO_TTE_E1,,Ruta integrada o alimentador c3 y 6,bus,4
+Medellin,MODO_TTE_E1,,Bus/Buseta/Microbús urbano,bus,5
+Medellin,MODO_TTE_E1,,Bus/Buseta/Microbús Intermunicipal,bus,6
+Medellin,MODO_TTE_E1,,Empresa (Tte-especial),bus,7
+Medellin,MODO_TTE_E1,,Taxi colectivo (amarillo),taxi,8
+Medellin,MODO_TTE_E1,,Taxi Individual (amarillo),taxi,9
+Medellin,MODO_TTE_E1,,Taxi intermunicipal o colectivo (blanco),taxi,10
+Medellin,MODO_TTE_E1,,Auto Particular (Acompañante),car,11
+Medellin,MODO_TTE_E1,,Auto Particular (Conductor),car,12
+Medellin,MODO_TTE_E1,,Particular con pago (En calle - Sin plataforma),car,13
+Medellin,MODO_TTE_E1,,Particular con pago (Solicitado con plataforma),car,14
+Medellin,MODO_TTE_E1,,Escolar,van,15
+Medellin,MODO_TTE_E1,,Moto (Acompañante),motorcycle,16
+Medellin,MODO_TTE_E1,,Moto (Conductor),motorcycle,17
+Medellin,MODO_TTE_E1,,MotoTaxi,motorcycle,18
+Medellin,MODO_TTE_E1,,Motocarro,rickshaw,19
+Medellin,MODO_TTE_E1,,Bicicleta propia,bicycle,20
+Medellin,MODO_TTE_E1,,Bicicleta pública,bicycle,21
+Medellin,MODO_TTE_E1,,A pie,walk,22
+Medellin,MODO_TTE_E1,,A pie 1 cuadra,walk,23
+Medellin,MODO_TTE_E1,,A pie 10 cuadras,walk,24
+Medellin,MODO_TTE_E1,,A pie 11 cuadras,walk,25
+Medellin,MODO_TTE_E1,,A pie 12 cuadras,walk,26
+Medellin,MODO_TTE_E1,,A pie 13 cuadras,walk,27
+Medellin,MODO_TTE_E1,,A pie 14 cuadras,walk,28
+Medellin,MODO_TTE_E1,,A pie 15 cuadras,walk,29
+Medellin,MODO_TTE_E1,,A pie 16 cuadras,walk,30
+Medellin,MODO_TTE_E1,,A pie 17 cuadras,walk,31
+Medellin,MODO_TTE_E1,,A pie 18 cuadras,walk,32
+Medellin,MODO_TTE_E1,,A pie 19 cuadras ó más,walk,33
+Medellin,MODO_TTE_E1,,A pie 2 cuadras,walk,34
+Medellin,MODO_TTE_E1,,A pie 3 cuadras,walk,35
+Medellin,MODO_TTE_E1,,A pie 4 cuadras,walk,36
+Medellin,MODO_TTE_E1,,A pie 5 cuadras,walk,37
+Medellin,MODO_TTE_E1,,A pie 6 cuadras,walk,38
+Medellin,MODO_TTE_E1,,A pie 7 cuadras,walk,39
+Medellin,MODO_TTE_E1,,A pie 8 cuadras,walk,40
+Medellin,MODO_TTE_E1,,A pie 9 cuadras,walk,41
+Medellin,MODO_TTE_E1,,Cable,other,42
+Medellin,MODO_TTE_E1,,Avión,other,43
