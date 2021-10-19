@@ -61,3 +61,21 @@ Cali,P_13_D,11,Trámites,other
 Cali,P_13_D,12,Recreación,other
 Cali,P_13_D,13,Buscar trabajo,work
 Cali,P_13_D,77,Otra cosa,other
+Bogota,p17_Id_motivo_viaje,1,Trabajar,work
+Bogota,p17_Id_motivo_viaje,2,Asuntos de trabajo,work
+Bogota,p17_Id_motivo_viaje,3,Estudiar,school
+Bogota,p17_Id_motivo_viaje,4,Recibir atencion en salud,other
+Bogota,p17_Id_motivo_viaje,5,Ver a alguien,other
+Bogota,p17_Id_motivo_viaje,6,Volver a casa,return
+Bogota,p17_Id_motivo_viaje,7,Buscar/Dejar a alguien,other
+Bogota,p17_Id_motivo_viaje,8,Buscar/Dejar algo,other
+Bogota,p17_Id_motivo_viaje,9,Comer/Tomar algo,other
+Bogota,p17_Id_motivo_viaje,10,Compras,other
+Bogota,p17_Id_motivo_viaje,11,Tramites,other
+Bogota,p17_Id_motivo_viaje,12,Recreacion y cultura,other
+Bogota,p17_Id_motivo_viaje,13,Buscar trabajo,work
+Bogota,p17_Id_motivo_viaje,14,Actividades con fines religiosos,other
+Bogota,p17_Id_motivo_viaje,15,Cuidado de personas,other
+Bogota,p17_Id_motivo_viaje,16,Actividad fisica y deporte,other
+Bogota,p17_Id_motivo_viaje,77,Otra,other
+Bogota,p17_Id_motivo_viaje,99,NS/NR,other

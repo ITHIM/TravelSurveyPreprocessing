@@ -217,3 +217,40 @@ Cali,P_14_D,27,Vehiculo privado como conductor,car,
 Cali,P_14_D,28,Vehiculo privado como pasajero,car,
 Cali,P_14_D,29,MIO-Troncal,bus,
 Cali,P_14_D,30,A pie,walk,
+Bogota,p18_id_medio_transporte,1,01. TransMilenio ,bus,1
+Bogota,p18_id_medio_transporte,3,03. Bus dual ,bus,2.1
+Bogota,p18_id_medio_transporte,4,04. SITP - Urbano (Azul) ,bus,2.2
+Bogota,p18_id_medio_transporte,5,05. SITP - Complementario (Naranja) ,bus,2.3
+Bogota,p18_id_medio_transporte,6,06. SITP - Especial (Vinotinto) ,bus,2.4
+Bogota,p18_id_medio_transporte,2,02. Alimentador ,bus,3
+Bogota,p18_id_medio_transporte,7,07. SITP - Provisional ,bus,4
+Bogota,p18_id_medio_transporte,8,08. Bus intermunicipal ,bus,5
+Bogota,p18_id_medio_transporte,16,16. Taxi ,taxi,6.1
+Bogota,p18_id_medio_transporte,17,17. Taxi solicitado por App ,taxi,6.2
+Bogota,p18_id_medio_transporte,24,24. Cable ,other,7
+Bogota,p18_id_medio_transporte,34,34. Vehículo privado como conductor ,car,8.1
+Bogota,p18_id_medio_transporte,35,35. Vehículo privado como pasajero ,car,8.2
+Bogota,p18_id_medio_transporte,32,32. Motocicleta como conductor ,motorcycle,9.1
+Bogota,p18_id_medio_transporte,33,33. Motocicleta como pasajero ,motorcycle,9.2
+Bogota,p18_id_medio_transporte,19,19. Bus/buseta informal/pirata/Chana ,bus,10.1
+Bogota,p18_id_medio_transporte,18,18. Taxi colectivo ,taxi,10.2
+Bogota,p18_id_medio_transporte,15,15. Automóvil informal/pirata ,car,10.3
+Bogota,p18_id_medio_transporte,14,14. Transporte individual en automóvil/camioneta por app móvil placa blanca/placa amarilla,car,10.4
+Bogota,p18_id_medio_transporte,10,10. Campero/jeep ,car,10.5
+Bogota,p18_id_medio_transporte,20,20. Mototaxi (2 ruedas) ,motorcycle,10.6
+Bogota,p18_id_medio_transporte,11,11. Transporte escolar ,van,11
+Bogota,p18_id_medio_transporte,23,23. Bicitaxi ,rickshaw,12
+Bogota,p18_id_medio_transporte,30,30. Bicicleta ,bicycle,13.1
+Bogota,p18_id_medio_transporte,36,36. Bicicleta como pasajero ,bicycle,13.2
+Bogota,p18_id_medio_transporte,13,13. Bicicleta pública ,bicycle,13.3
+Bogota,p18_id_medio_transporte,31,31. Bicicleta con motor ,motorcycle,13.4
+Bogota,p18_id_medio_transporte,37,37. Patineta ,other,14
+Bogota,p18_id_medio_transporte,40,40. A pie (Viajes totalmente a pie) ,walk,15
+Bogota,p18_id_medio_transporte,25,25. Tren ,train,16.1
+Bogota,p18_id_medio_transporte,12,12. Bus privado/de empresa ,bus,16.2
+Bogota,p18_id_medio_transporte,9,09. Bus escalera/Chiva ,bus,16.3
+Bogota,p18_id_medio_transporte,21,21. Motocarro de pasajeros/carga ,rickshaw,16.4
+Bogota,p18_id_medio_transporte,39,39. Camión/Volqueta/Tractomula ,truck,16.5
+Bogota,p18_id_medio_transporte,22,22. Vehículo de tracción animal ,other,16.6
+Bogota,p18_id_medio_transporte,38,38. Vehículo de tracción humana ,other,16.7
+Bogota,p18_id_medio_transporte,99,99. Otro ,other,16.8
