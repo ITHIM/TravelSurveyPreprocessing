@@ -47,3 +47,17 @@ Medellin,MOTIVO_VIAJE,8,Diligencia o trámite,other
 Medellin,MOTIVO_VIAJE,9,Acompañar a alguien,other
 Medellin,MOTIVO_VIAJE,10,Recoger o dejar a alguien ,other
 Medellin,MOTIVO_VIAJE,11,Otro                          ,other
+Cali,P_13_D,1,Trabajar,work
+Cali,P_13_D,2,Asuntos de trabajo,work
+Cali,P_13_D,3,Estudiar,school
+Cali,P_13_D,4,Recibir atención en salúd,other
+Cali,P_13_D,5,Ver a alguien,other
+Cali,P_13_D,6,Volver a casa,return
+Cali,P_13_D,7,Buscar / Dejar a alguien,other
+Cali,P_13_D,8,Buscar / Dejar algo,other
+Cali,P_13_D,9,Comer / Tomar algo,other
+Cali,P_13_D,10,Compras,other
+Cali,P_13_D,11,Trámites,other
+Cali,P_13_D,12,Recreación,other
+Cali,P_13_D,13,Buscar trabajo,work
+Cali,P_13_D,77,Otra cosa,other
