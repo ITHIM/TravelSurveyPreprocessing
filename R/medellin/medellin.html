@@ -254,8 +254,8 @@ div.tocify {
 <div id="understanding-phase" class="section level1">
 <h1><strong>Understanding phase</strong></h1>
 <pre><code>##           used (Mb) gc trigger  (Mb) max used (Mb)
-## Ncells 1053790 56.3    2196245 117.3  1305841 69.8
-## Vcells 1777421 13.6    8388608  64.0  2214603 16.9</code></pre>
+## Ncells 1053791 56.3    2196235 117.3  1305798 69.8
+## Vcells 1777436 13.6    8388608  64.0  2214610 16.9</code></pre>
 <div id="documentation" class="section level2">
 <h2>Documentation</h2>
 <p>These files are available in the v-drive in the path “V:/Studies/MOVED/HealthImpact/Data/Country/Colombia/Medellin/Travel/EOD2017/Reports/”. Locally, this documentation is located in “…/Colombia/Medellin/Trips/Reports/”. These files were found in <a href="https://datosabiertos.metropol.gov.co/" class="uri">https://datosabiertos.metropol.gov.co/</a> but also sent to me from the project of WWF. I looked for information with more detail and the only thing that is published is this dashboard: <a href="https://www.metropol.gov.co/observatorio/Paginas/encuestaorigendestino.aspx" class="uri">https://www.metropol.gov.co/observatorio/Paginas/encuestaorigendestino.aspx</a></p>
@@ -547,7 +547,7 @@ length(unique(trips$participant_id_paste)) == nrow(people)</code></pre>
 <p>Nowhere in the documentation says something about the process to define the trip main mode of transport. I asked directly to people from Medellin and they told me there was hierarchy (like in Bogota) but they didn’t send it to me. As a consequence I decided to create this classification and its hierarchy based on the information I have from Bogota. This is the result:</p>
 <pre class="r"><code>main_mode &lt;- read_csv(&quot;Data/Standardization/Modes_by_city.csv&quot;) %&gt;% 
   filter(City == &quot;Medellin&quot;)</code></pre>
-<pre><code>## Rows: 188 Columns: 6</code></pre>
+<pre><code>## Rows: 218 Columns: 6</code></pre>
 <pre><code>## -- Column specification --------------------------------------------------------
 ## Delimiter: &quot;,&quot;
 ## chr (4): City, VariableName, RawMode, ITHIM
@@ -1050,7 +1050,7 @@ other
 <pre class="r"><code>#table(trips$DESC_MOTIVO_VIAJE, trips$MOTIVO_VIAJE)
 purpose &lt;- read_csv(&quot;Data/Standardization/Purpose_by_city.csv&quot;) %&gt;% 
   filter(City == &quot;Medellin&quot;)</code></pre>
-<pre><code>## Rows: 48 Columns: 5</code></pre>
+<pre><code>## Rows: 62 Columns: 5</code></pre>
 <pre><code>## -- Column specification --------------------------------------------------------
 ## Delimiter: &quot;,&quot;
 ## chr (4): City, VariableName, RawPurpose, ITHIM
@@ -1315,7 +1315,7 @@ NA
 <h2>Row for each trip, translate trip_mode and create duration, sex and age</h2>
 <p>Trip dataset already has a row for each trip, so I have to create the variables I need.</p>
 <pre class="r"><code>trips_v2 &lt;- trips %&gt;% 
-  mutate(trip_id = trip_id_paste,
+  mutate(trip_id = SEC_VIAJE,
          trip_duration = as.numeric(difftime(HORA_D, HORA_O, units = &quot;mins&quot;)),
          # Replace modes by its hierarchy
          mode_e1 = main_mode$Hierarchy[
@@ -1333,7 +1333,8 @@ NA
          mode_e7 = main_mode$Hierarchy[
            match(DESC_MODO_TTE_E7, main_mode$RawMode)],
          trip_purpose = purpose$ITHIM[
-           match(as.numeric(MOTIVO_VIAJE), purpose$Code)]) %&gt;%
+           match(as.numeric(MOTIVO_VIAJE), purpose$Code)],
+         trip_id_paste = paste(ID_HOGAR, ID_MORADOR, SEC_VIAJE, sep = &quot;-&quot;)) %&gt;%
   # Now compute the main mode by looking at the hierarchy
   rowwise() %&gt;% mutate(
     main_modes = min(mode_e1, mode_e2, mode_e3, mode_e4, mode_e5, mode_e6,

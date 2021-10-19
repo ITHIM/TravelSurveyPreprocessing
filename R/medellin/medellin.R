@@ -250,7 +250,7 @@ trips %>% filter(ID_HOGAR == "309974", ID_MORADOR == "2",
 #' Trip dataset already has a row for each trip, so I have to create the 
 #' variables I need. 
 trips_v2 <- trips %>% 
-  mutate(trip_id = trip_id_paste,
+  mutate(trip_id = SEC_VIAJE,
          trip_duration = as.numeric(difftime(HORA_D, HORA_O, units = "mins")),
          # Replace modes by its hierarchy
          mode_e1 = main_mode$Hierarchy[
@@ -268,7 +268,8 @@ trips_v2 <- trips %>%
          mode_e7 = main_mode$Hierarchy[
            match(DESC_MODO_TTE_E7, main_mode$RawMode)],
          trip_purpose = purpose$ITHIM[
-           match(as.numeric(MOTIVO_VIAJE), purpose$Code)]) %>%
+           match(as.numeric(MOTIVO_VIAJE), purpose$Code)],
+         trip_id_paste = paste(ID_HOGAR, ID_MORADOR, SEC_VIAJE, sep = "-")) %>%
   # Now compute the main mode by looking at the hierarchy
   rowwise() %>% mutate(
     main_modes = min(mode_e1, mode_e2, mode_e3, mode_e4, mode_e5, mode_e6,
