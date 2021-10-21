@@ -300,7 +300,8 @@ report <- people_v2 %>%
          participant_wt = 1,
          meta_data = NA) %>% 
   select(cluster_id, household_id, participant_id, sex, age, participant_wt,
-         trip_id, trip_mode, trip_duration, trip_purpose, meta_data) 
+         trip_id, trip_mode, trip_duration, trip_purpose, meta_data,
+         trip_id_paste) 
 
 report$meta_data[1] <- 2293601
 report$meta_data[2] <- "..." 

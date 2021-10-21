@@ -24,14 +24,14 @@ rm(list = ls());gc()
 # Printing options
 options(scipen = 50)
 
-#' This file is based on the script "travel_survey.R". It has the same code but
+#' This file is based on the script "travel_survey.R" from the ITHIM-R package.
+#' It has the same code but
 #' I added some comments. The processing of this dataset is totally different
 #' because the survey is about time use not travel.
 #' 
 #' 
 #' ## Documentation 
-#' Documentation is located in ".../Ghana/Accra/Trips/Reports/". I downloaded
-#' these files from v drive.
+#' These files are available in the v-drive in the path "V:/Studies/MOVED/HealthImpact/Data/Country/Ghana/Travel/Time Use Survey/". Locally, this documentation is located in: ".../Ghana/Accra/Trips/Reports/". 
 #'
 #' From now on: 
 #+ warning=FALSE, message=FALSE, echo=FALSE
@@ -49,21 +49,21 @@ data.frame(
 #' 
 #' 
 #' ## Replicate main results from raw datasets
-#' To create this report I have to set the full route of each file, regardless
+#' To create this report I have to set the full path of each file, regardless
 #' the location of the working directory.
 #'
 #' Loading standardize_modes function:
 #+ warning=FALSE, message=FALSE
-#external_route <- "C:/Users/danie/Documents/Daniel_Gil/Consultorias/2021/WorldBank/ITHIM-R/code/producing_trips_rd/"
-#external_route <- "CAMBRIDGE_ROUTE V DRIVE"
-#source(paste0(external_route, "used_functions.R")) 
+#external_path <- "C:/Users/danie/Documents/Daniel_Gil/Consultorias/2021/WorldBank/ITHIM-R/code/producing_trips_rd/"
+#external_path <- "CAMBRIDGE_path V DRIVE"
+#source(paste0(external_path, "used_functions.R")) 
 
 #' It didn't work with knitr so I had to paste this function here. 
 #' 
 #' **Note: Before running this script, make sure this function is up to date**
 standardize_modes <- function(trip, mode){
   # Read lookup table
-  smodes <- read_csv('C:/Users/danie/Documents/Daniel_Gil/Consultorias/2020/WorldBank/ITHIM-R/data/global/modes/standardized_modes.csv')
+  smodes <- read_csv('Data/Modes/standardized_modes.csv')
   # Separate rows 
   smodes <- smodes %>% separate_rows(original, sep = ';')
   
@@ -95,12 +95,15 @@ standardize_modes <- function(trip, mode){
 # time_use_0 <- haven::read_spss("J://Studies//MOVED//HealthImpact//Data//TIGTHAT//Accra//Accra data and microdata//Time Use Survey//Data//GTUS 2009 24 Hours Individual Diary.sav")
 
 #' #### Importing from local directory
-route <- "C:/Users/danie/Documents/Daniel_Gil/Consultorias/2021/Cambridge/Data/Ghana/Accra/Trips/"
+# V-Drive folder
+#path <- "V:/Studies/MOVED/HealthImpact/Data/Country/Ghana/TravelTime Use Survey/Data/"
+# Local folder
+path <- "C:/Users/danie/Documents/Daniel_Gil/Consultorias/2021/Cambridge/Data/Ghana/Accra/Trips/"
 
-people <- haven::read_spss(paste0(route, "GTUS 2009 Individual Characteristics.sav"))
+people <- haven::read_spss(paste0(path, "GTUS 2009 Individual Characteristics.sav"))
 
 #+ warning=FALSE, message=FALSE, cache=TRUE
-time_use_0 <- haven::read_spss(paste0(route, "GTUS 2009 24 Hours Individual Diary.sav"))
+time_use_0 <- haven::read_spss(paste0(path, "GTUS 2009 24 Hours Individual Diary.sav"))
 time_use_0 <- as_factor(time_use_0)
 
 #lookup
@@ -229,7 +232,7 @@ trip <- trip %>% mutate(trip_mode = replace(trip_mode, !is.na(trip$trip_mode) & 
 
 #' Export dataset to make the report
 #quality_check(trip)
-write.csv(trip, "C:/Users/danie/Documents/Daniel_Gil/Consultorias/2020/WorldBank/ITHIM-R/data/local/accra/accra_trip.csv")
+write.csv(trip, "Data/Report/accra/accra_trip.csv")
 
 #' ## Create motorcycle trips
 #' The following code has as an input accra_trip.csv and as output accra_trip_with_mbike.csv
@@ -281,32 +284,6 @@ write_csv(trip, "C:/Users/danie/Documents/Daniel_Gil/Consultorias/2020/WorldBank
 
 # Load helpful functions
 #source("code/producing_trips_rd/used_functions.R")
-
-# Defining standardized_modes function again 
-standardize_modes <- function(trip, mode){
-  # Read lookup table
-  smodes <- read_csv('C:/Users/danie/Documents/Daniel_Gil/Consultorias/2020/WorldBank/ITHIM-R/data/global/modes/standardized_modes.csv')
-  # Separate rows 
-  smodes <- smodes %>% separate_rows(original, sep = ';')
-  
-  smodes <- smodes %>% 
-    mutate(across(where(is.character), str_trim))
-  
-  if (length(mode) == 1) {
-    if (mode == 'stage')
-      trip$stage_mode <- smodes$exhaustive_list[match(trip$stage_mode, smodes$original)]
-    else
-      trip$trip_mode <- smodes$exhaustive_list[match(trip$trip_mode, smodes$original)]
-  }else if (length(mode) == 2) {
-    if (all(mode %in% c('stage', 'trip'))) {
-      trip$trip_mode <- smodes$exhaustive_list[match(trip$trip_mode, smodes$original)]
-      trip$stage_mode <- smodes$exhaustive_list[match(trip$stage_mode, smodes$original)]
-    }
-  }
-  
-  return(trip)
-  
-}
 
 # Standardized travel modes
 trip <- standardize_modes(trip, mode = c('trip'))

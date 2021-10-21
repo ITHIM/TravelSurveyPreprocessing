@@ -254,3 +254,19 @@ Bogota,p18_id_medio_transporte,39,39. Camión/Volqueta/Tractomula ,truck,16.5
 Bogota,p18_id_medio_transporte,22,22. Vehículo de tracción animal ,other,16.6
 Bogota,p18_id_medio_transporte,38,38. Vehículo de tracción humana ,other,16.7
 Bogota,p18_id_medio_transporte,99,99. Otro ,other,16.8
+Montevideo,"modoprincipal	",0,A pie hasta 10 cuadras,walk,
+Montevideo,"modoprincipal	",1,A pie,walk,
+Montevideo,"modoprincipal	",2,Bicicleta,bicycle,
+Montevideo,"modoprincipal	",3,"Otro, animal",other,
+Montevideo,"modoprincipal	",4,Remise,taxi,
+Montevideo,"modoprincipal	",5,Otro Uber,car,
+Montevideo,"modoprincipal	",6,Taxi,taxi,
+Montevideo,"modoprincipal	",7,Auto pasajero,car,
+Montevideo,"modoprincipal	",8,Auto conductor,car,
+Montevideo,"modoprincipal	",9,Moto pasajero,motorcycle,
+Montevideo,"modoprincipal	",10,Moto conductor,motorcycle,
+Montevideo,"modoprincipal	",11,Bus escolar,van,
+Montevideo,"modoprincipal	",12,Bus de la empresa,bus,
+Montevideo,"modoprincipal	",13,Bus,bus,
+Montevideo,"modoprincipal	",14,Ferrocarril,train,
+Montevideo,"modoprincipal	",15,"Otros, sin especificar",other,

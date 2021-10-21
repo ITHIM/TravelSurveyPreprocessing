@@ -308,7 +308,8 @@ report <- people_v2 %>%
          participant_wt = F_EXP.x,
          meta_data = NA) %>% 
   select(cluster_id, household_id, participant_id, sex, age, participant_wt,
-         trip_id, trip_mode, trip_duration, trip_purpose, meta_data) 
+         trip_id, trip_mode, trip_duration, trip_purpose, meta_data,
+         trip_id_paste) 
 
 #' I verify that every trip has the sex and age of the person who did it. Since
 #' the sum of NAs is zero, then I can conclude that every trip has the

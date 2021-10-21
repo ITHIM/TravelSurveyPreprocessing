@@ -79,3 +79,20 @@ Bogota,p17_Id_motivo_viaje,15,Cuidado de personas,other
 Bogota,p17_Id_motivo_viaje,16,Actividad fisica y deporte,other
 Bogota,p17_Id_motivo_viaje,77,Otra,other
 Bogota,p17_Id_motivo_viaje,99,NS/NR,other
+Montevideo,proposito,1,Regreso al hogar/hogar,return
+Montevideo,proposito,2,Trabajo,work
+Montevideo,proposito,3,Trámites trabajo,work
+Montevideo,proposito,4,Trámites personal,other
+Montevideo,proposito,5,Estudios         ,school
+Montevideo,proposito,6,Compras (hogar),other
+Montevideo,proposito,7,Compras,other
+Montevideo,proposito,8,Asistencia_médica,other
+Montevideo,proposito,9,Culto,other
+Montevideo,proposito,10,Ir a comer,other
+Montevideo,proposito,11,Dejar/recoger niños,other
+Montevideo,proposito,12,Dejar/recoger a alguien,other
+Montevideo,proposito,13,Visitar a alguien,other
+Montevideo,proposito,14,Acompañar a alguien,other
+Montevideo,proposito,15,Entretenimiento / ocio,other
+Montevideo,proposito,16,Otro,other
+Montevideo,proposito,99,Sin_dato,other
