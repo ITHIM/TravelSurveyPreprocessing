@@ -96,3 +96,23 @@ Montevideo,proposito,14,Acompañar a alguien,other
 Montevideo,proposito,15,Entretenimiento / ocio,other
 Montevideo,proposito,16,Otro,other
 Montevideo,proposito,99,Sin_dato,other
+BuenosAires,ACTIDEST,11,Amigos,other
+BuenosAires,ACTIDEST,3,Asunto laboral,work
+BuenosAires,ACTIDEST,7,Compras,other
+BuenosAires,ACTIDEST,14,Culto,other
+BuenosAires,ACTIDEST,4,Cursar estudios,school
+BuenosAires,ACTIDEST,17,"Dejar, recoger o acompañar a miembro del hogar a ctro educ.",other
+BuenosAires,ACTIDEST,18,"Dejar, recoger o acompañar a miembro del hogar a otro lugar",other
+BuenosAires,ACTIDEST,19,"Dejar, recoger o acompañar a NO miembro del hogar",other
+BuenosAires,ACTIDEST,8,Deportes,other
+BuenosAires,ACTIDEST,5,Estudios (otros),school
+BuenosAires,ACTIDEST,12,Familia,other
+BuenosAires,ACTIDEST,10,Gastronomía,other
+BuenosAires,ACTIDEST,1,Hogar,return
+BuenosAires,ACTIDEST,2,Lugar de trabajo,work
+BuenosAires,ACTIDEST,20,Otro,other
+BuenosAires,ACTIDEST,15,Personal,other
+BuenosAires,ACTIDEST,9,Recreación,other
+BuenosAires,ACTIDEST,6,Salud,other
+BuenosAires,ACTIDEST,13,Social,other
+BuenosAires,ACTIDEST,16,Trámites personales,other

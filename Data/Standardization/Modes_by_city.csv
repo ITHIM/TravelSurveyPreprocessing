@@ -270,3 +270,19 @@ Montevideo,"modoprincipal	",12,Bus de la empresa,bus,
 Montevideo,"modoprincipal	",13,Bus,bus,
 Montevideo,"modoprincipal	",14,Ferrocarril,train,
 Montevideo,"modoprincipal	",15,"Otros, sin especificar",other,
+BuenosAires,MODOTRAN,1,Automovil / conductor,car,8
+BuenosAires,MODOTRAN,2,Automovil / acompañante,car,9
+BuenosAires,MODOTRAN,3,Taxi,taxi,6
+BuenosAires,MODOTRAN,4,Remis,taxi,7
+BuenosAires,MODOTRAN,5,Colectivo,bus,4
+BuenosAires,MODOTRAN,6,Subte / Premetro,metro,3
+BuenosAires,MODOTRAN,7,Ferrocarril,train,1
+BuenosAires,MODOTRAN,8,Charter / combi,van,10
+BuenosAires,MODOTRAN,9,Bus empresa,bus,5
+BuenosAires,MODOTRAN,10,Transporte escolar,van,11
+BuenosAires,MODOTRAN,11,Motocicleta,motorcycle,12
+BuenosAires,MODOTRAN,12,Bicicleta,bicycle,13
+BuenosAires,MODOTRAN,13,A pie,walk,14
+BuenosAires,MODOTRAN,14,Lancha Colectiva,other,15
+BuenosAires,MODOTRAN,15,Otros,other,16
+BuenosAires,MODOTRAN,16,Tranvia,train,2

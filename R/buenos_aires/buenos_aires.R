@@ -7,6 +7,9 @@
 #'     toc_float: true
 #' ---
 
+#' Note: in order to create the markdown properly from this file, Rstudio options need to be changed. Tools > Global Options > R Markdown > Evaluate chunks in directory > Current. By default this option is set to *Document*, but here you need to change it to *Current* so everything works as expected.
+#' 
+#' 
 #' # **Understanding phase**
 #+ warning=FALSE, message=FALSE, echo=FALSE
 # Loading libraries
@@ -27,10 +30,8 @@ options(scipen = 50)
 #' This file is based on the script "travel_survey.R". It has the same code but
 #' I added some comments.
 #' 
-#' 
-#' ## Documentation 
-#' Documentation is located in ".../Argentina/BuenosAires/Trips/". I downloaded
-#' these files from v drive.
+#' ## Documentation
+#' These files are available in the v-drive in the path "V:/Studies/MOVED/HealthImpact/Data/Country/Argentina/WP1-TS/Buenos Aires/". Locally, this documentation is located in ".../Argentina/BuenosAires/Trips/Reports".
 #'
 #' From now on: 
 #+ warning=FALSE, message=FALSE, echo=FALSE
@@ -49,21 +50,12 @@ data.frame(
 #' 
 #' 
 #' ## Replicate main results from raw datasets
-#' To create this report I have to set the full route of each file, regardless
-#' the location of the working directory.
-#'
 #' Loading standardize_modes function:
 #+ warning=FALSE, message=FALSE
-#external_route <- "C:/Users/danie/Documents/Daniel_Gil/Consultorias/2021/WorldBank/ITHIM-R/code/producing_trips_rd/"
-#external_route <- "CAMBRIDGE_ROUTE V DRIVE"
-#source(paste0(external_route, "used_functions.R")) 
-
-#' It didn't work with knitr so I had to paste this function here. 
-#' 
 #' **Note: Before running this script, make sure this function is up to date**
 standardize_modes <- function(trip, mode){
   # Read lookup table
-  smodes <- read_csv('C:/Users/danie/Documents/Daniel_Gil/Consultorias/2020/WorldBank/ITHIM-R/data/global/modes/standardized_modes.csv')
+  smodes <- read_csv('Data/Standardization/standardized_modes.csv')
   # Separate rows 
   smodes <- smodes %>% separate_rows(original, sep = ';')
   
@@ -93,43 +85,29 @@ mode_speed <- data.frame(
   mode_speed = c(15, 15, 25, 25, 25,21 ,25,25, 30,25,25, 5 ))
 
 #' ### Importing datasets
-#' 
-#' #### Importing from V drive
-#' I'm not importing directly from V drive because it takes too long. This is 
-#' why this piece of code is commented.
-# # data
-# person_0 <- read_sav('J://Studies//MOVED//HealthImpact//Data//TIGTHAT//Argentina//WP1-TS//Buenos Aires//ENMODO_PERSONAS_pub_20121115.sav')
-# trip_0 <- read_sav("J://Studies//MOVED//HealthImpact//Data//TIGTHAT//Argentina//WP1-TS//Buenos Aires//ENMODO_VIAJES_pub_20121115.sav")
-# stage_0 <- read_sav("J://Studies//MOVED//HealthImpact//Data//TIGTHAT//Argentina//WP1-TS//Buenos Aires//ENMODO_ETAPAS_pub_20121115.sav")
-# 
-# #lookups
-# trip_purpose <- read_excel("J://Studies//MOVED//HealthImpact//Data//TIGTHAT//Argentina//WP1-TS//Buenos Aires//lookup.xlsx",sheet = "trip_purpose", range = cell_cols("A:B"))
-# stage_mode <- read_excel("J://Studies//MOVED//HealthImpact//Data//TIGTHAT//Argentina//WP1-TS//Buenos Aires//lookup.xlsx",sheet= "stage_mode", range = cell_cols("A:C"))# also ranks the modes
-
-#' #### Importing from local directory
-route <- "C:/Users/danie/Documents/Daniel_Gil/Consultorias/2021/Cambridge/Data/Argentina/BuenosAires/Trips/"
+#' Since this dataset is a .SAV file the data dictionary is already in it.
+#' I ran everything local because it is faster, but if someone wants to run this
+#' script, then only the path needs to be changed.
+# V-Drive folder
+#path <- "V:/Studies/MOVED/HealthImpact/Data/Country/Argentina/WP1-TS/Buenos Aires/"
+# Local folder
+path <- "C:/Users/danie/Documents/Daniel_Gil/Consultorias/2021/Cambridge/Data/Argentina/BuenosAires/Trips/"
 
 #+ warning=FALSE, message=FALSE, cache=TRUE
 # People
-person_0 <- read_sav(paste0(route, "ENMODO_PERSONAS_pub_20121115.sav"))
+people <- read_sav(paste0(path, "ENMODO_PERSONAS_pub_20121115.sav"))
 # Trips
-trip_0 <- read_sav(paste0(route, "ENMODO_VIAJES_pub_20121115.sav"))
+trips <- read_sav(paste0(path, "ENMODO_VIAJES_pub_20121115.sav"))
 # Stages
-stage_0 <- read_sav(paste0(route, "ENMODO_ETAPAS_pub_20121115.sav"))
-
-#lookups
-# trip_purpose <- read_excel(paste0(route, "lookup.xlsx"), sheet = 'trip_purpose',
-#                            range = cell_cols("A:B"))
-# stage_mode <- read_excel(paste0(route, "lookup.xlsx"), sheet = 'stage_mode',
-#                          range = cell_cols("A:C"))
+stages <- read_sav(paste0(path, "ENMODO_ETAPAS_pub_20121115.sav"))
 
 #' ### Number of people per partido
 #' Compare this with what is mentioned in page 9 (Cuadro 2.1.1) of **File1**. 
-names(person_0)
-#sum(person_0$wt1) # Same as total in cuadro 2.1.1
-#person_0 %>% group_by(PARTIDO) %>% summarise(total = sum(wt1)) %>% 
+#names(people)
+#sum(people$wt1) # Same as total in cuadro 2.1.1
+#people %>% group_by(PARTIDO) %>% summarise(total = sum(wt1)) %>% 
 #    kbl() %>% kable_classic()
-print(person_0 %>% group_by(PARTIDO) %>% summarise(total = sum(wt1)), n = 50)
+print(people %>% group_by(PARTIDO) %>% summarise(total = sum(wt1)), n = 50)
 
 #' # **Preprocessing phase**
 #' ## Filtering people from Buenos Aires metropolitan area
@@ -137,23 +115,64 @@ print(person_0 %>% group_by(PARTIDO) %>% summarise(total = sum(wt1)), n = 50)
 #' municipalities, and the jurisdiction of injuries is 
 #' Greater BA (24 municipalities) + Autonomous BA then I have to filter out
 #' "partidos" Escobar (252), Pilar (638) and Presidente Peron (648)
-#keep relevant variables
-person <- person_0[,c("PARTIDO","IDH","IDP", "EDAD", "SEXO","wt1")] %>% 
+people_v2 <- people %>% 
   filter(!PARTIDO %in% c(252, 638, 648))
-#sum(person$wt1)
+#sum(people_v2$wt1)
+
+#' I just verify that there are no duplicates in people dataset
+people_v2 <- people_v2 %>% 
+  mutate(participant_id_paste = IDP)
+length(unique(people_v2$participant_id_paste)) == nrow(people_v2)
 
 #' ## Classification and translation of trip modes and purpose
-#' In the lookup file there's already a hierarchy defined by Lambed. The column
-#' is called "rank"
+#' In the trip dataset there's already a variable (TIPOTRAN) with the
+#' classification of trip mode, however it is full of zeros. So I have to use
+#' the stage mode (MODOTRAN) as a reference, and define a hierarchy (like in
+#' other cities) to get the trip mode. The lower the number the more priority
+#' the mode has (like a ranking), therefore if a trip has two stages: bus and
+#' taxi, it will be classified as bus because it has more priority. This is the
+#' result:
+
 #+ warning=FALSE, message=FALSE, cache=TRUE
-trip_purpose <- read_excel(paste0(route, "lookup.xlsx"), sheet = 'trip_purpose',
-                           range = cell_cols("A:B"))
-stage_mode <- read_excel(paste0(route, "lookup.xlsx"), sheet = 'stage_mode',
-                         range = cell_cols("A:C"))
+main_mode <- read_csv("Data/Standardization/Modes_by_city.csv") %>% 
+  filter(City == "BuenosAires")
+main_mode[,-c(1:2)] %>% kbl() %>% kable_classic()
+
+#' Now with respect to trip purpose, there are two different classifications:
+#' origin and destination purpose. In this case, I take destination
+#' purpose as reference (ACTIDEST), so all I did was to translate and reclassify
+#' them.
+purpose <- read_csv("Data/Standardization/Purpose_by_city.csv") %>% 
+  filter(City == "BuenosAires")
+purpose[,-c(1:2)] %>% kbl() %>% kable_classic()
+
+#' ## Information at stage or trip level?
+#' 
+#' 
+#' First I verify there are no duplicates in trips and stage datasets. It is
+#' important to note that in this survey the IDs (participant, trip and stage)
+#' are different to other surveys, because they already come as a concatenation
+#' of IDs. 
+trips <- trips %>% 
+  mutate(trip_id_paste = paste(IDH, IDP, IDV, sep = "-"))
+length(unique(trips$trip_id_paste)) == nrow(trips) # OK
+
+stages <- stages %>% 
+  mutate(stage_id_paste = paste(IDH, IDP, IDV, IDE, sep = "-"))
+length(unique(stages$stage_id_paste)) == nrow(stages) # OK
+
+#' Almost 12% of trips have more than 1 stage
+n_stages <- stages %>% count(IDH, IDP, IDV)
+table(n_stages$n, useNA = "always")
+table(n_stages$n, useNA = "always") / nrow(n_stages)
+
+
+
+
 
 #' ## Row for each stage, translate trip_mode and create duration
 #' First I create trip duration and then select some variables
-trip <- trip_0 %>% 
+trips_v2 <- trips %>% 
   mutate(trip_duration_1 = ((HORALLEG - HORASALI)%%24)*60 + 
            (MINLLEGA - MINSALID), 
          trip_duration_2 = difftime(HORAFIN,HORAINI,tz="GMT",units="mins"),
@@ -165,7 +184,7 @@ trip <- trip_0 %>%
 #' Translate stage mode and compute stage duration.
 #' 
 #' Here the trip mode is defined based on a hierarchy (column "rank")
-stage <- stage_0 %>% 
+stages_v2 <- stages %>% 
   left_join(stage_mode) %>%  #add mode names in english and ranks
   left_join(count(.,IDV)) %>%  # add number of stages for each trip --> to be used later
   left_join(trip[,c("IDV", "trip_duration")]) %>% #add trip duration

@@ -11,7 +11,7 @@
 
 <meta name="author" content="Daniel" />
 
-<meta name="date" content="2021-10-19" />
+<meta name="date" content="2021-11-22" />
 
 <title>Preprocessing of Cali’s travel dataset</title>
 
@@ -245,7 +245,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Preprocessing of Cali’s travel dataset</h1>
 <h4 class="author">Daniel</h4>
-<h4 class="date">2021-10-19</h4>
+<h4 class="date">2021-11-22</h4>
 
 </div>
 
@@ -254,8 +254,8 @@ div.tocify {
 <div id="understanding-phase" class="section level1">
 <h1><strong>Understanding phase</strong></h1>
 <pre><code>##           used (Mb) gc trigger  (Mb) max used (Mb)
-## Ncells 1053803 56.3    2196865 117.4  1305864 69.8
-## Vcells 1777717 13.6    8388608  64.0  2214880 16.9</code></pre>
+## Ncells 1053814 56.3    2196428 117.4  1305738 69.8
+## Vcells 1777832 13.6    8388608  64.0  2216583 17.0</code></pre>
 <div id="documentation" class="section level2">
 <h2>Documentation</h2>
 <p>These files are available in the v-drive in the path “V:/Studies/MOVED/HealthImpact/Data/Country/Colombia/Cali/Trips/EODH2015/”. Locally, this documentation is located in “…/Colombia/Cali/Trips/Documentos”.</p>
@@ -687,7 +687,7 @@ length(unique(people_v2$participant_id_paste)) == nrow(people_v2)</code></pre>
 <p>Nowhere in the documentation says something about the process to define the trip main mode of transport. It looks like that in the imputed dataset the information about the main mode is already cleaned in variable P_MP_14_D because there’s no info about other stages. So I decided to create this table based on the information I have (in the access database) and translated it (similar to what I did with Medellin). This is the result:</p>
 <pre class="r"><code>main_mode &lt;- read_csv(&quot;Data/Standardization/Modes_by_city.csv&quot;) %&gt;% 
   filter(City == &quot;Cali&quot;)</code></pre>
-<pre><code>## Rows: 218 Columns: 6</code></pre>
+<pre><code>## Rows: 287 Columns: 6</code></pre>
 <pre><code>## -- Column specification --------------------------------------------------------
 ## Delimiter: &quot;,&quot;
 ## chr (4): City, VariableName, RawMode, ITHIM
@@ -1047,7 +1047,7 @@ walk
 <p>Now with respect to trip purpose, I only had to translate them (P_13_D). This is the result:</p>
 <pre class="r"><code>purpose &lt;- read_csv(&quot;Data/Standardization/Purpose_by_city.csv&quot;) %&gt;% 
   filter(City == &quot;Cali&quot;)</code></pre>
-<pre><code>## Rows: 62 Columns: 5</code></pre>
+<pre><code>## Rows: 117 Columns: 5</code></pre>
 <pre><code>## -- Column specification --------------------------------------------------------
 ## Delimiter: &quot;,&quot;
 ## chr (4): City, VariableName, RawPurpose, ITHIM
@@ -1459,7 +1459,19 @@ NA
          participant_wt = F_EXP.x,
          meta_data = NA) %&gt;% 
   select(cluster_id, household_id, participant_id, sex, age, participant_wt,
-         trip_id, trip_mode, trip_duration, trip_purpose, meta_data) </code></pre>
+         trip_id, trip_mode, trip_duration, trip_purpose, meta_data,
+         trip_id_paste) 
+
+report$meta_data[1] &lt;- 2227642
+report$meta_data[2] &lt;- &quot;...&quot; 
+report$meta_data[3] &lt;- &quot;Travel Survey&quot;
+report$meta_data[4] &lt;- 2015
+report$meta_data[5] &lt;- &quot;1 day&quot;
+report$meta_data[6] &lt;- &quot;Yes, but no stage duration&quot; #Stage level data available
+report$meta_data[7] &lt;- &quot;All purpose&quot;#Overall trip purpose
+report$meta_data[8] &lt;- &quot;Yes, but not here (yet)&quot; # Short walks to PT
+report$meta_data[9] &lt;- &quot;No&quot; # Distance available
+report$meta_data[10] &lt;- &quot;...&quot; # missing modes#&#39; </code></pre>
 <p>I verify that every trip has the sex and age of the person who did it. Since the sum of NAs is zero, then I can conclude that every trip has the information.</p>
 <pre class="r"><code>sum(is.na(report$sex))</code></pre>
 <pre><code>## [1] 0</code></pre>

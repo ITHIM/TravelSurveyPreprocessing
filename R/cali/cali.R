@@ -311,6 +311,17 @@ report <- people_v2 %>%
          trip_id, trip_mode, trip_duration, trip_purpose, meta_data,
          trip_id_paste) 
 
+report$meta_data[1] <- 2227642
+report$meta_data[2] <- "..." 
+report$meta_data[3] <- "Travel Survey"
+report$meta_data[4] <- 2015
+report$meta_data[5] <- "1 day"
+report$meta_data[6] <- "Yes, but no stage duration" #Stage level data available
+report$meta_data[7] <- "All purpose"#Overall trip purpose
+report$meta_data[8] <- "Yes, but not here (yet)" # Short walks to PT
+report$meta_data[9] <- "No" # Distance available
+report$meta_data[10] <- "..." # missing modes#' 
+
 #' I verify that every trip has the sex and age of the person who did it. Since
 #' the sum of NAs is zero, then I can conclude that every trip has the
 #' information.
