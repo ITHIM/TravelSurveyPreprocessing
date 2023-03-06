@@ -95,7 +95,7 @@ standardize_modes <- function(trip, mode){
 #path <- "V:/Studies/MOVED/HealthImpact/Data/Country/Colombia/Bogota/Travel/trips_2019/BD EODH2019 FINAL v14022020/Archivos XLSX/"
 # Local folder
 path <- "C:/Users/danie/Documents/Daniel_Gil/Consultorias/2021/Cambridge/Data/Colombia/Bogota/Trips/BD EODH2019 FINAL v14022020/Archivos XLSX/"
-
+path <- "/home/danielgils_server/consultorias/cambridge/data/colombia/bogota/trips/BD EODH2019 FINAL v14022020/Archivos XLSX/"
 #+ warning=FALSE, message=FALSE, cache=TRUE
 # Households (hh)
 hh <- read_excel(paste0(path, "HogaresEODH2019.xlsx"), guess_max = 100000) 
@@ -741,7 +741,7 @@ trips_export <- trips_export %>% mutate(
 #' Now I filter the columns I need
 trips_export <- trips_export %>% 
   dplyr::select(participant_id, age, sex, trip_id, trip_mode, trip_duration,
-                stage_id, stage_mode, stage_duration)
+                stage_id, stage_mode, stage_duration, participant_wt)
 
 #' ### Export dataset
 write_csv(trips_export, 'Data/ITHIM/bogota/trips_bogota.csv')
